@@ -1,0 +1,93 @@
+<html>
+
+<!--
+CSS:
+	- canvas (in div)
+	- blocks
+	- characters
+JS: 
+	- function input()
+		- matrix with for block positioning
+			- several possibilities
+HTML:
+	- 1200x600 screen
+	- 20 square length, 10 square height
+	- 60px by 60px squares
+-->
+
+<head>
+	<style>
+		#myCanvas {
+			width: 1200px;
+			height: 600px;
+			position: relative;
+			overflow:hidden;
+			border-style:solid;
+		}
+		.block1{
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: blue;
+		}
+		.block2 {
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: green;
+		}
+	</style>
+	
+</head>
+<body>
+	<div id = "myCanvas">
+	</div>
+	
+	
+</body>
+<script>
+		var classes = ["", "block1", "block2"];
+		
+		function input() {
+			var display = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			
+			for (j = 0; j < display.length; j++) {
+				for (i = 0; i < display[j].length; i++) {
+					if (display[j][i] == 0) {
+						var garbage = "";
+					}
+					else {
+						var gameElement = document.createElement("DIV");
+						gameElement.classList.add(classes[display[j][i]]);
+						var gameID = "a" + j + i;
+						gameElement.id = gameID;
+						gameElement.style.left = 60*i+"px";
+						gameElement.style.top = 60*j+"px";
+						document.getElementById("myCanvas").appendChild(gameElement);
+					}
+				}
+			}
+		}
+		document.onloadstart = input();
+		
+		function bombs() {
+			//60*i+30, 60*j+30 are the coordinates for the centre
+			//draw 100px radius circle and anything inside is removed if it is the centre of block2 or characters
+			
+			if (display[j][i] == 2) {
+				
+			}
+		}
+	</script>
+</html>
