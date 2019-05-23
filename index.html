@@ -1,0 +1,504 @@
+
+
+<html>
+<link rel="icon" href="Images/cursor.png" type="image/x-icon"/>
+<style>
+body,td,th {
+	font-family: Calibri;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#container {
+	width: 1200px;
+	background-color:lightgreen;
+	height: 600px;
+	cursor: url('Images/Cursor.png'), default;
+	overflow: hidden;
+	position: relative;
+}
+
+.turret {
+
+background-color: crimson;
+
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		position: absolute;
+	left:210px;
+	top: 210px;
+	transition-duration: 2s;
+	transition-property: top, left;
+
+}
+.inBox {
+		opacity:0;
+
+	    width: 60px;
+	    height: 70px;
+	    border-radius: 20%;
+	    position: absolute;
+		left:200px;
+		top: 200px;
+		transition-duration: 2s;
+		transition-property: top, left;
+	}
+
+	.turreta {
+		transition-duration: 2s;
+		transition-property: top, left;
+		transition-timing-function: linear;
+	}
+
+.inBoxA {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+
+}
+
+.box{
+    background-color: orange;
+    width: 60px;
+    height: 70px;
+    border-radius: 20%;
+    position: absolute;
+	left:200px;
+	top: 200px;
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+}
+.boxb{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+}
+
+.boxc{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+
+}
+.boxa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+		border-color: orange;
+}
+.player {
+	position: absolute;
+	width: 70px;
+	background-color: yellow;
+	border-radius: 50%;
+	height:70px;
+}
+
+.q {
+	position: absolute;
+	width: 10px;
+	height: 40px;
+	border-radius: 20%;
+	background-color: cyan;
+	top: 225px;
+	left:225px;
+	z-index:100000;
+	transform-origin: 50% 0;
+	opacity: 1;
+
+}
+
+.qa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+
+
+
+}
+.aa {
+	position: absolute;
+	width: 5px;
+	height:20px;
+	background-color: purple;
+	border-radius: 25%;
+	z-index: 10;
+	transform-origin: 50% 0;
+	transition-duration: 0.5s;
+	transition-property: left, top;
+}
+.aaa{
+
+	transition-property: top, left;
+	transition-timing-function: linear;
+		transform-origin: 50% 0;
+
+
+
+}
+
+#move {
+	width: 30px;
+	height: 30px;
+	border-radius:50%;
+	background-color: green;
+	transform : translate3d( 50px, 50px, 0);
+	transition-duration: 0.25s;
+	transition-property: opacity;
+	position: absolute;
+	transition-timing-function: linear;
+}
+
+
+
+
+
+#myCanvas {
+			width: 1200px;
+			height: 600px;
+			position: relative;
+			overflow:hidden;
+			border-style:solid;
+		}
+		.block1{
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: blue;
+		}
+		.block2 {
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: green;
+		}
+
+</style>
+
+
+<body>
+<div id = "container" class = "container">
+<div class="player" ></div>
+<div class="q qa" ></div>
+<div class="aa aaa" ></div>
+<div id="move" > </div>
+<div class="box boxa " id="box"></div>
+<div class = "inBoxA inBox"> </div>
+<div class = "turret turreta"></div>
+</div>
+
+
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+</script>
+<script>
+var container =$("#container")
+var boxb =$(".boxb");
+var boxc=$(".boxc");
+var turreta=$(".turreta")
+var turret=$(".turret");
+var box=$(".box");
+var speed = 15;
+var boxa=$(".boxa");
+var inBox=$(".inBox");
+var inBoxA=$(".inBoxA");
+var counter = 0;
+var qa =$(".qa");
+var aa=$(".aa")
+var q=$(".q");
+var aaa=$(".aaa")
+var move = document.querySelector("#move");
+var container = document.querySelector("#container");
+var absx = 0;
+var absy = 0;
+var mousePosition = {x:0, y:0};
+document.addEventListener('mousemove', function(mouseMoveEvent){
+  mousePosition.x = mouseMoveEvent.pageX;
+  mousePosition.y = mouseMoveEvent.pageY;
+	var boxCenter=[inBox.offset().left + inBox.width()/2, inBox.offset().top + inBox.height()/2];
+	var angle = Math.atan2( - (mouseMoveEvent.pageX- boxCenter[0]),  (mouseMoveEvent.pageY- boxCenter[1]) )*(180/Math.PI);
+	q.css({ 'transform':  'rotate(' + angle + 'deg)  '});
+
+
+}, false);
+
+
+
+container.addEventListener("click", getClickPosition, false);
+function getClickPosition(e) {
+
+	var xPosition= e.clientX - (move.offsetWidth /2) ;
+	var yPosition = e.clientY - (move.offsetHeight/2) ;
+	var translate3dValue = "translate3d(" + xPosition + "px," + yPosition + "px, 0 )";
+	move.style.transform  = translate3dValue;
+	move.style.transitionDuration = "0s";
+	move.style.opacity = "1";
+	move.offsetHeight;
+	move.style.transitionDuration = "0.5s";
+	move.style.opacity = "0";
+
+
+
+
+}
+
+$(document).click(function(e){
+
+	 var boxCenter=[inBox.offset().left + inBox.width()/2, inBox.offset().top + inBox.height()/2];
+
+    var movetime =  Math.sqrt(Math.pow((e.pageX - boxCenter[0]), 2) + Math.pow((e.pageY - boxCenter[1]), 2)) /200;
+    var transx = e.pageX - (inBox.width()/2) ;
+	var transy = e.clientY - (inBox.height()/2);
+	var angle = Math.atan2(e.pageX- boxCenter[0],- (e.pageY- boxCenter[1]) )*(180/Math.PI);
+
+	inBoxA.css({
+		'transition-duration' : movetime + 's',
+
+	})
+
+	boxa.css({
+		'transition-duration' : movetime + 's',
+
+	})
+
+	qa.css({
+		'transition-duration' : movetime + 's',
+
+	})
+	turreta.css({
+		'transition-duration' : movetime + 's',
+
+	})
+
+	inBox.offsetWidth;
+	boxa.offsetWidth;
+var transxturret = e.pageX - 20 ;
+var transyturret = e.pageY - 20 ;
+	boxa.css({
+		'left' : transx + 'px',
+		'top' : transy + 'px'
+	})
+	turret.css({
+		'left' : transxturret + 'px',
+		'top' : transyturret + 'px'
+	})
+	inBoxA.css({
+		'left' : transx + 'px',
+		'top' : transy + 'px'
+	})
+	qa.css({
+		'left' : e.pageX - qa.width()/2 + 'px',
+		'top' : e.pageY +  'px'
+
+	})
+
+box.css({ 'transform':  'rotate(' + angle + 'deg)  '});
+/*
+if (counter==0){
+
+	document.getElementById("box").classList.remove("boxc")
+	document.getElementById("box").classList.add("boxb")
+	boxb =$(".boxb")
+	boxb.css({ 'transform':  'rotate(' + angle + 'deg)  '});
+} else {
+
+	document.getElementById("box").classList.remove("boxb")
+	document.getElementById("box").classList.add("boxc")
+	boxc =$(".boxc")
+
+	boxc.css({ 'transform':  'rotate(' + angle + 'deg)  '});
+}
+counter++;
+counter = counter %2;
+*/
+
+
+
+
+});
+
+
+
+document.addEventListener("keydown", ability, false);
+
+var bullets = [];
+var bulletNumber = 0;
+
+
+function ability(event){
+
+/* w= 87, q = 81, s = 83 , d = 68, a = 41*/
+	var n = event.which;
+	var x =  mousePosition.x;
+	var y =  mousePosition.y;
+	
+	
+	if(n == 87) {
+	 	var boxCenter=[inBox.offset().left + inBox.width()/2, inBox.offset().top + inBox.height()/2];
+		var angle = Math.atan2(-(x - boxCenter[0]), (y - boxCenter[1]) )*(180/Math.PI);
+		  
+		var dist = Math.sqrt(Math.pow((x - boxCenter[0]), 2) + Math.pow((y - boxCenter[1]), 2));
+		aaa.css({ 'transform':  'rotate(' + angle + 'deg)  '});
+		 absx = (x-boxCenter[0])/dist;
+			absy = (y-boxCenter[1])/dist;
+			var bullet = document.createElement("DIV");
+			bullet.classList.add("aa");
+			bullet.classList.add("aaa");
+			var bullId = "bul" + bulletNumber;
+			bullet.id = bullId;
+			bullet.style.left = boxCenter[0] - aa.width()/2 + 'px';
+			bullet.style.top = boxCenter[1] - aa.height()/2 + 'px';
+		
+			var list2 = [bullId, 0, absx, absy, 10];
+			bullets.push(list2);
+			container.appendChild(bullet);
+		
+			bulletNumber++;		
+			dontcrashpls();
+			setInterval(dontcrashpls, 500);
+			setInterval(plsdontcrash, 50);
+	}
+
+}
+
+
+function dontcrashpls(){
+	for (i = bullets.length-1; i >=0; i=i-1) {
+		
+		var chair = bullets[i];
+		var desk = document.getElementById(chair[0]);
+		
+		
+		desk.style.left = desk.offsetLeft + 200*chair[2] + 'px';
+		desk.style.top = desk.offsetTop + 200*chair[3] + 'px';	
+		
+	}
+
+}
+
+
+function plsdontcrash(){
+	for (i = bullets.length-1; i >=0; i=i-1){
+		var chair = bullets[i];	
+		var desk = document.getElementById(chair[0]);
+			if(desk.offsetLeft < 0 && chair[4] != 0){
+				chair[1] = chair[1] + 1;
+				chair[2] = - chair[2];
+				desk.style.left = 0;
+				chair[4] = 0;
+			}	else if(desk.offsetLeft > 1200&& chair[4] != 1){
+				chair[1] += 1;
+				chair[2] = -chair[2];
+				desk.style.left = 1200;
+				chair[4] = 1;
+			}	else if(desk.offsetTop < 0 && chair[4] !=2){
+				chair[1] += 1;
+				chair[3] = -chair[3];
+				desk.style.top = 0;
+				chair[4] = 2 ;
+			}	else if(desk.offsetTop > 600 && chair[4] != 3){
+				chair[1] += 1;
+				chair[3] = -chair[3];
+				desk.style.top = 600;
+				chair[4] =3
+			}
+			console.log(chair[4], chair[1])
+		if(chair[1] == 4){
+			bullets.splice(i,1);
+			desk.parentNode.removeChild(desk);
+		}
+		
+		
+	}
+	
+	
+	
+}
+function callback(){
+	shoot(aa, absx, absy)
+}
+resetx = 0
+resety = 0
+function shoot(thing, x , y){
+
+if((thing.offset().left>=1200|| thing.offset().left <=0)&&resetx==0){ 	
+		absx = -absx
+		
+		resetx = 1
+} else if(thing.offset().left<1200|| thing.offset().left >0){
+	resetx = 0;
+}
+
+
+if((thing.offset().top>=600 || thing.offset().top <=0)&& resety ==0){
+		absy = -absy
+		resety = 1
+	
+}	else if(thing.offset().top <600 || thing.offset().top > 0){
+	resety = 0;
+}
+	
+aa.css({
+	'left' : thing.offset().left + 200*absx + 'px',
+	'top' : thing.offset().top +  200*absy +  'px'
+		
+})
+	
+	
+
+
+console.log(thing.offset().left, thing.offset().top)
+}
+
+
+
+var classes = ["", "block1", "block2"];
+		
+		function input() {
+			var display = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+			]
+			
+			for (j = 0; j < display.length; j++) {
+				for (i = 0; i < display[j].length; i++) {
+					if (display[j][i] == 0) {
+						var garbage = "";
+					}
+					else {
+						var gameElement = document.createElement("DIV");
+						gameElement.classList.add(classes[display[j][i]]);
+						var gameID = "a" + j + i;
+						gameElement.id = gameID;
+						gameElement.style.left = 60*i+"px";
+						gameElement.style.top = 60*j+"px";
+						document.getElementById("container").appendChild(gameElement);
+					}
+				}
+			}
+		}
+		document.onloadstart = input();
+		
+	
+
+
+</script></html>
