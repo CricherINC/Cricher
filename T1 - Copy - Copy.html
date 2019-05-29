@@ -1,0 +1,409 @@
+
+
+<html>
+<link rel="icon" href="Images/cursor.png" type="image/x-icon"/>
+<style>
+body,td,th {
+	font-family: Calibri;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#container {
+	width: 1200px;
+
+	height: 600px;
+	cursor: url('Images/Cursor.png'), default;
+	overflow: hidden;
+	position: relative;
+}
+
+.turret {
+
+background-color: crimson;
+
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		position: absolute;
+	left:210px;
+	top: 210px;
+	transition-duration: 2s;
+	transition-property: top, left;
+
+}
+.inBox {
+		opacity:0;
+
+	    width: 60px;
+	    height: 70px;
+	    border-radius: 20%;
+	    position: absolute;
+		left:200px;
+		top: 200px;
+		transition-duration: 2s;
+		transition-property: top, left;
+	}
+
+	.turreta {
+		transition-duration: 2s;
+		transition-property: top, left;
+		transition-timing-function: linear;
+	}
+
+.inBoxA {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+
+}
+
+.box{
+    background-color: orange;
+    width: 60px;
+    height: 70px;
+    border-radius: 20%;
+    position: absolute;
+	left:200px;
+	top: 200px;
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+}
+.boxb{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+}
+
+.boxc{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+
+}
+.boxa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+		border-color: orange;
+}
+.player {
+	position: absolute;
+	width: 70px;
+	background-color: yellow;
+	border-radius: 50%;
+	height:70px;
+}
+
+.q {
+	position: absolute;
+	width: 10px;
+	height: 40px;
+	border-radius: 20%;
+	background-color: cyan;
+	top: 225px;
+	left:225px;
+	z-index:100000;
+	transform-origin: 50% 0;
+	opacity: 1;
+
+}
+
+.qa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+
+
+
+}
+.aa {
+	position: absolute;
+	width: 5px;
+	height:20px;
+	background-color: purple;
+	border-radius: 25%;
+	z-index: 10;
+	transform-origin: 50% 0;
+	transition-duration: 0.5s;
+	transition-property: left, top;
+}
+.aaa{
+
+	transition-property: top, left;
+	transition-timing-function: linear;
+		transform-origin: 50% 0;
+
+
+
+}
+
+#move {
+	width: 30px;
+	height: 30px;
+	border-radius:50%;
+	background-color: green;
+	transform : translate3d( 50px, 50px, 0);
+	transition-duration: 0.25s;
+	transition-property: opacity;
+	position: absolute;
+	transition-timing-function: linear;
+}
+
+
+
+
+
+#myCanvas {
+			width: 1200px;
+			height: 600px;
+			position: relative;
+			overflow:hidden;
+			border-style:solid;
+		}
+		.block1{
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: blue;
+		}
+		.block2 {
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: green;
+		}
+
+canvas {
+	background-color: lightgreen;
+}
+</style>
+
+<body>
+
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+</script>
+<script src = "Game_Fields.js">
+</script>
+<script>
+var container =$("#container");
+var blockLine = [];
+var display =  [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+			]
+
+	var display1 = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+				[0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+				[0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+				[0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+			]
+
+
+		function squares() {
+
+
+			for (j = 0; j < display1.length; j++) {
+				for (i = 0; i < display1[j].length; i++) {
+					if (display1[j][i] != 0) {
+						Block = {posx: 60*i, posy : 60*j , isDead : false, color : "black"}
+						if (display1[j][i] == 1) {
+							Block.color = "blue";
+
+						} else if (display1[j][i] ==2) {
+							Block.color = "green";
+						}
+						blockLine.push(Block);
+					}
+
+				}
+			}
+		}
+
+squares();
+var xPosition=0;
+var yPosition=0;
+var xClick= 0;
+var yClick=0;
+
+console.log(blockLine);
+
+var myGamePiece;
+var player;
+
+
+function startGame() {
+    myField = new blocks();
+    myGameArea.start();
+}
+
+myGamePiece = new component(25, 20, "red",150, 100);
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 1200;
+        this.canvas.height = 600;
+		this.canvas.addEventListener('click', function(e){
+	var distance = Math.sqrt(Math.pow((e.pageX - myGamePiece.x), 2) + Math.pow((e.pageY - myGamePiece.y), 2))
+	xPosition= 3*(e.clientX - myGamePiece.x)/distance;
+	yPosition = 3*(e.clientY - myGamePiece.y)/distance;
+	xClick = e.pageX;
+	yClick=e.pageY;
+
+}, false);
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, -200);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+
+function blocks(){
+	this.update = function(){
+        ctx = myGameArea.context;
+       for(let i of blockLine){
+			ctx.fillStyle = i.color;
+			ctx.fillRect(i.posx, i.posy, 60, 60);
+		}
+    }
+}
+function component(width, height, color, x, y, type) {
+    this.type = type;
+    this.score = 0;
+    this.width = width;
+    this.height = height;
+    this.speedX = 1;
+    this.speedY = 1;
+		this.relx = function() {
+			return (this.x - 60* this.i());
+		};
+
+		this.rely = function() {
+			return (this.y - 60 * this.j());
+		}
+    this.x = x;
+    this.y = y;
+		this.i = function(){
+			return (Math.floor(this.x/60));
+		};
+		this.j = function(){
+			return (Math.floor(this.y	/60));
+		};
+    this.gravity = 0;
+    this.gravitySpeed = 0;
+    this.update = function() {
+        ctx = myGameArea.context;
+        if (this.type == "text") {
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        } else {
+            ctx.fillStyle = color;
+			ctx.beginPath();
+			ctx.arc(this.x,this.y,this.width,0,2*Math.PI);
+            ctx.fill();
+        }
+		blockLine.pop();
+		blockLine.push({posx: 60*this.i(), posy : 60*this.j() , isDead : false, color : "black"});
+    }
+    this.newPos = function() {
+        if(((this.x-xClick)*(this.x-xClick)>2)||(this.y-yClick)*(this.y-yClick)>2){
+
+
+			this.crashWith();
+			this.x += xPosition;
+			this.y += yPosition;
+
+    }}
+    this.hitBottom = function() {
+        var rockbottom = myGameArea.canvas.height - this.height;
+        if (this.y > rockbottom) {
+            this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+    }
+		this.a = 0;
+
+    this.crashWith = function() {
+
+    		if(((wallcheck(this.j()-1,this.i()) != 0 )&&(this.rely()+yPosition<= 25))||((wallcheck(this.j()+1,this.i()) != 0 )&&(this.rely() +yPosition >= 35)) ) {
+						yPosition = 0;
+
+					} else if(((wallcheck(this.j(),this.i()-1) != 0 )&&(this.relx() + xPosition <= 25)) ||((wallcheck(this.j(),this.i()+1) != 0 )&& (this.relx() + xPosition >= 35)) ) {
+						xPosition = 0;
+
+				} else{
+
+					for (i=-1;i<=1;i=i+2){
+						for(j = -1; j<=1; j = j+2){
+							if((wallcheck(this.j()+j,this.i()+i)!=0)&&(distance(this.relx()+xPosition,this.rely()+yPosition,(1+i)*30,(1+j)*30)<=25)){
+								xPosition = 0;
+								yPosition = 0;
+
+
+								}
+
+
+					}
+				}
+			}
+		}
+
+
+
+
+}
+function distance(x1, y1, x2, y2){
+	var re =  Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2)	);
+	return re;
+}
+function wallcheck(y,x){
+	if((x<0)||(x>=display1[0].length)||(y<0)||(y>=display1.length)){
+
+		return 1;
+	}
+	else{
+		return display1[y][x];
+	}
+}
+function updateGameArea() {
+
+    myGameArea.clear();
+    myField.update();
+
+	myGamePiece.newPos();
+	myGamePiece.update();
+}
+startGame();
+
+
+</script></html>
