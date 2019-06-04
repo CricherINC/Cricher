@@ -1,0 +1,911 @@
+
+
+<html>
+<link rel="icon" href="Images/cursor.png" class="image/x-icon"/>
+<style>
+body,td,th {
+	font-family: Calibri;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#container {
+	width: 1200px;
+
+	height: 600px;
+	cursor: url('Images/Cursor.png'), default;
+	overflow: hidden;
+	position: relative;
+}
+
+.turret {
+background-color: crimson;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		position: absolute;
+	left:210px;
+	top: 210px;
+	transition-duration: 2s;
+	transition-property: top, left;
+
+}
+.inBox {
+		opacity:0;
+
+	    width: 60px;
+	    height: 70px;
+	    border-radius: 20%;
+	    position: absolute;
+		left:200px;
+		top: 200px;
+		transition-duration: 2s;
+		transition-property: top, left;
+	}
+
+	.turreta {
+		transition-duration: 2s;
+		transition-property: top, left;
+		transition-timing-function: linear;
+	}
+
+.inBoxA {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+
+}
+
+.box{
+    background-color: orange;
+    width: 60px;
+    height: 70px;
+    border-radius: 20%;
+    position: absolute;
+	left:200px;
+	top: 200px;
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+}
+.boxb{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+}
+
+.boxc{
+	transition-property: transform;
+	transition-duration: 0.5s;
+	transition-property: top, left;
+
+
+}
+.boxa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+	border-style: solid;
+		border-color: orange;
+}
+.player {
+	position: absolute;
+	width: 70px;
+	background-color: yellow;
+	border-radius: 50%;
+	height:70px;
+}
+
+.q {
+	position: absolute;
+	width: 10px;
+	height: 40px;
+	border-radius: 20%;
+	background-color: cyan;
+	top: 225px;
+	left:225px;
+	z-index:100000;
+	transform-origin: 50% 0;
+	opacity: 1;
+
+}
+
+.qa {
+	transition-duration: 2s;
+	transition-property: top, left;
+	transition-timing-function: linear;
+
+
+
+}
+.aa {
+	position: absolute;
+	width: 5px;
+	height:20px;
+	background-color: purple;
+	border-radius: 25%;
+	z-index: 10;
+	transform-origin: 50% 0;
+	transition-duration: 0.5s;
+	transition-property: left, top;
+}
+.aaa{
+
+	transition-property: top, left;
+	transition-timing-function: linear;
+		transform-origin: 50% 0;
+
+
+
+}
+
+#move {
+	width: 30px;
+	height: 30px;
+	border-radius:50%;
+	background-color: green;
+	transform : translate3d( 50px, 50px, 0);
+	transition-duration: 0.25s;
+	transition-property: opacity;
+	position: absolute;
+	transition-timing-function: linear;
+}
+
+
+
+
+
+#myCanvas {
+			width: 1200px;
+			height: 600px;
+			position: relative;
+			overflow:hidden;
+			border-style:solid;
+		}
+		.block1{
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: blue;
+		}
+		.block2 {
+			height: 60px;
+			width: 60px;
+			position: absolute;
+			background-color: green;
+		}
+
+canvas {
+	background-color: lightgreen;
+}
+</style>
+
+<body>
+
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+</script>
+<script src = "Game_Fields.js">
+</script>
+<script>
+var container =$("#container");
+var blockLine = [];
+var display =  [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+			];
+
+	var display1 = [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+				[0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+				[0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+				[0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1,20, 0, 0, 0, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0],
+				[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+			];
+
+
+		function squares() {
+
+
+			for (j = 0; j < display1.length; j++) {
+				for (i = 0; i < display1[j].length; i++) {
+					if (display1[j][i] != 0 && display1[j][i]<20) {
+						Block = {posx: 60*i, posy : 60*j , isDead : false, color : "black"}
+						if (display1[j][i] == 1) {
+							Block.color = "blue";
+
+						} else if (display1[j][i] ==2) {
+							Block.color = "green";
+						}
+						blockLine.push(Block);
+
+					}
+					if (display1[j][i] == 20){
+						playerCounter++;
+						enemy1 = new character("Enemy1", playerCounter, [60*i+30, 60*j+30]);
+						assignValues(enemy1);
+						display1[j][i] = 0;
+						players[playerCounter] = enemy1;
+					}
+
+				}
+			}
+		}
+
+
+
+var playerCounter = 0;
+var xClick= 0;
+var yClick=0;
+
+console.log(blockLine);
+
+var myGamePiece;
+var player;
+var bullets = {};
+var players = {};
+var counter = 0;
+var mousePosition = {x:0, y:0};
+
+function startGame() {
+    myField = new blocks();
+    myGameArea.start();
+		squares();
+		console.log(players)
+}
+
+
+/* width, color, x, y, class, speed, speedX, speedY*/
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 1200;
+        this.canvas.height = 600;
+		this.canvas.addEventListener('click', function(e){
+		myGamePiece.moveTo(e.pageX,e.pageY);
+	xClick = e.pageX;
+	yClick = e.pageY;
+
+
+
+}, false);
+window.addEventListener('keydown', function(){
+	var n = event.which;
+	if(n == 87) {
+		var dist = distance(mousePosition.x, mousePosition.y, myGamePiece.x, myGamePiece.y);
+		myGamePiece.shoot(1,[(mousePosition.x - myGamePiece.x)/dist,(mousePosition.y - myGamePiece.y)/dist]);
+
+	} else if(n==32||n==69){
+		//myGamePiece.mine(1);
+		enemy1.ai.randomMove();
+		return;
+	}
+
+
+
+}, true);
+
+this.canvas.addEventListener('mousemove', function(mouseMoveEvent){
+  mousePosition.x = mouseMoveEvent.pageX;
+  mousePosition.y = mouseMoveEvent.pageY;
+
+},false);
+
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, -200);
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+
+function blocks(){
+	this.update = function(){
+        ctx = myGameArea.context;
+       for(let i of blockLine){
+			ctx.fillStyle = i.color;
+			ctx.fillRect(i.posx, i.posy, 60, 60);
+		}
+    }
+}
+
+var classes = {
+	Player : {
+		radius : 25,
+		color : "yellow",
+		start : [150,100],
+		speed : 3,
+		cooldown : 500,
+		capacity : 3,
+
+	},
+	Bullet1 : {
+		radius : 10,
+		color : "white",
+		speed : 5,
+		bounces : 5,
+	},
+	Bullet2 : {
+		radius : 10,
+		color : "orange",
+		speed : 6,
+		bounces : 4,
+	},
+	Bomb1: {
+		radius : 20,
+		color : "yellow",
+		altColor: "orange",
+		detonationRange : 50,
+	},
+	Enemy1 : {
+		radius : 25,
+		color: "red",
+		speed : 3,
+		cooldown : 500,
+		capacity : 3,
+		matrix : {
+			action : [0,0,1],
+			move : [3,1, 0],
+			dispertion : 1,
+		},
+	},
+	Enemy2 : {
+		radius : 25,
+		color: "yellow",
+		speed : 3,
+		cooldown : 500,
+		capacity : 3,
+		matrix : {
+			action : [0,0,1],
+			move : [3,1, 0],
+			dispertion : 1,
+
+		},
+	},
+//function gameElement(radius, color, x, y, type, speed, direction, bounces, index)
+
+}
+function AI(object, matrix){
+	this.random = Math.random();
+	this.moveMatrix = matrix.move;
+	this.actionMatrix = matrix.action;
+	this.disp = matrix.dispertion;
+	this.lastWall = [0,5]
+	this.sumProb = function(wh) {
+		var sum = 0;
+		for(let i of matrix[wh]){
+			sum += i;
+		}
+		return sum;
+	}
+	this.randomMove = function(){
+		this.random = Math.random();
+		//[[0,-1, -Math.PI/2],[0,1,Math.PI/2],[-1,0,Math.PI],[1,0,0]]
+		if(this.lastWall[1]==5){
+			object.direction = [Math.cos(2*Math.PI*this.random),Math.sin(2*Math.PI*this.random)];
+		}	else if((this.random-this.lastWall[0]+1)%(1)<(1/2)){
+			object.direction = [-Math.cos(2*Math.PI*this.random-Math.PI/2),Math.sin(2*Math.PI*this.random-Math.PI/2)];
+
+		} else{
+			object.direction = [-Math.cos(2*Math.PI*this.random+Math.PI/2),Math.sin(2*Math.PI*this.random+Math.PI/2)];
+		}
+		object.updateSpeed();
+
+		setTimeout(this.generateMove.bind(this), 500);
+	};
+	this.stop = function(){
+		object.direction = [0,0];
+		object.updateSpeed();
+		this.random = Math.random();
+		setTimeout(this.generateMove.bind(this), Math.floor(1000*Math.random()));
+	};
+	this.dodge = function(a){
+		this.random = Math.random();
+		if((this.random-
+
+			+1)%(1)<(1/2)){
+			object.direction = [-Math.cos(2*Math.PI*this.random-Math.PI/2),Math.sin(2*Math.PI*this.random-Math.PI/2)];
+
+		} else{
+			object.direction = [-Math.cos(2*Math.PI*this.random+Math.PI/2),Math.sin(2*Math.PI*this.random+Math.PI/2)];
+		}
+		object.updateSpeed();
+
+
+	}
+	this.generateMove = function() {
+		this.random = this.sumProb("move")*Math.random();
+		if(this.random < this.moveMatrix[0]){
+			this.randomMove();
+		} else if (this.random<this.moveMatrix[1]+this.moveMatrix[0]){
+			this.stop();
+		} else{
+			this.chaseEnemy();
+		}
+
+	};
+	this.generateAction = function(){
+		this.random =  this.sumProb("action")*Math.random();
+		if(this.random < this.actionMatrix[0]){
+			this.shootPlayer();
+		} else if(this.random < this.actionMatrix[0]+this.actionMatrix[1]){
+			this.shootRandom();
+		}	else{
+			setTimeout(this.generateAction.bind(this), 500);
+		}
+	};
+	this.shootRandom = function() {
+		console.log("hi")
+		this.random = Math.random();
+		if((this.random-this.lastWall[0]+1)%(1)<(1/2)){
+			object.shoot(2, [-Math.cos(2*Math.PI*this.random-Math.PI/2),Math.sin(2*Math.PI*this.random-Math.PI/2)]);
+		} else{
+			object.shoot(2,[-Math.cos(2*Math.PI*this.random+Math.PI/2),Math.sin(2*Math.PI*this.random+Math.PI/2)]);
+		}
+		setTimeout(this.generateAction.bind(this),500);
+	}
+	this.shootPlayer = function() {
+		for(var i in players){
+			if(players[i]!=object){
+				if(!lineOfSight(object, players[i])||!lineOfSight(players[i],object)){
+					this.generateAction();
+					return;
+				} else{
+					this.xdisp = Math.cos(Math.PI*2*(Math.random()-0.5)*this.disp);
+					this.ydisp = Math.sin(Math.PI*2*(Math.random()-0.5)*this.disp);
+					object.shoot(2, direc(object.x, object.y,players[i].x+this.xdisp,players[i].y+this.ydisp));
+					setTimeout(this.generateAction.bind(this),200);
+					return;
+				}
+		}
+	}
+
+	}
+	this.chaseEnemy = function(){
+		for(var i in players){
+			if(players[i]!=object){
+				if(!lineOfSight(object, players[i])||!lineOfSight(players[i],object)){
+					this.generateMove();
+					return;
+				} else{
+					object.moveTo(players[i].x, players[i].y);
+					setTimeout(this.generateMove.bind(this),200);
+					return;
+				}
+		}
+	}
+
+
+	}
+	this.seeEnemy = function(enemy){
+		if(enemy){
+			this.moveMatrix[2] = 4;
+			this.actionMatrix[0] = 3;
+		}	else{
+			this.moveMatrix[2] = 0;
+			this.actionMatrix[0] = 0;
+		}
+
+	};
+	this.seeBullet = function(bullet){
+		if(bullet){
+			this.actionMatrix[3] = 5;
+		} else{
+			this.actionMatrix[3] = 0;
+		}
+	}
+}
+function character(type, index, coordinates) {
+    this.type = type;
+		this.index = index;
+		this.velocity = [0,0];
+		this.x = coordinates[0];
+		this.test = [0,0];
+    this.y = coordinates[1];
+		this.reload = function(){
+				this.clipSize++;
+				if(this.clipSize<this.capacity){
+					setTimeout(this.reload.bind(this), this.timeout());
+				}
+		}
+		this.moveTo = function(x, y){
+			var dist = distance(x, y, this.x, this.y);
+			this.direction = [(x - this.x)/dist,(y - this.y)/dist];
+			this.updateSpeed();
+		};
+		this.shoot = function(type, direction) {
+			if(this.clipSize <1){
+				return;
+			};
+			if(this.clipSize == this.capacity){
+				setTimeout(this.reload.bind(this), this.timeout());
+			};
+			var bullet = new gameElement("Bullet"+type, counter, [this.x,this.y], direction);
+			assignValues(bullet);
+			bullets["b" + counter] = bullet;
+			this.clipSize = this.clipSize - 1;
+			counter++;
+		};
+		this.timeout = function(){
+			return this.cooldown;
+		}
+		this.onload = function(){
+			this.clipSize = this.capacity;
+			players[this.index] = this;
+			if(this.type=="Enemy1"||this.type=="Enemy2"){
+				var ai = new AI(this,this.matrix);
+				this.ai = ai;
+				ai.generateMove();
+				ai.generateAction();
+			}
+		}
+
+		this.updateSpeed = function(){
+			this.velocity[0] = this.speed*this.direction[0];
+			this.velocity[1] = this.speed*this.direction[1];
+		};
+
+		this.direction = [0,0];
+		this.relx = function() {
+			return (this.x - 60* this.i());
+		};
+		this.rely = function() {
+			return (this.y - 60 * this.j());
+		};
+
+		this.i = function(){
+			return (Math.floor(this.x/60));
+		};
+		this.j = function(){
+			return (Math.floor(this.y	/60));
+		};
+    this.update = function() {
+        ctx = myGameArea.context;
+				this.newPos();
+      ctx.fillStyle = this.color;
+			ctx.beginPath();
+			ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+      ctx.fill();
+			ctx.beginPath();
+			ctx.strokeStyle = "purple"
+			ctx.moveTo(this.x,this.y);
+			ctx.lineTo(this.x+50*this.direction[0],this.y+50*this.direction[1]);
+			ctx.stroke();
+
+			if(this.ai){
+				ctx.beginPath();
+				ctx.strokeStyle = "blue";
+				ctx.moveTo(this.x,this.y);
+				ctx.lineTo(this.x-50*Math.cos(this.ai.lastWall[0]*2*Math.PI),this.y+50*Math.sin(this.ai.lastWall[0]*2*Math.PI));
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.strokeStyle = "orange"
+				ctx.moveTo(this.x,this.y);
+				ctx.lineTo(this.x+50*this.test[0],this.y+50*this.test[1]);
+				ctx.stroke();
+
+				for(var i in players){
+					if(players[i]!=this){
+						if(!lineOfSight(this, players[i])||!lineOfSight(players[i],this)){
+							this.ai.seeEnemy(false);
+							return;
+						} else{
+							this.ai.seeEnemy(players[i]);
+							return
+						}
+
+				}
+			}
+
+
+		}
+
+
+    };
+		this.kill = function(){
+				delete players[this.index];
+		};
+    this.newPos = function() {
+			if(this.type == "Player"){
+        if(((this.x-xClick)*(this.x-xClick)<2)&&((this.y-yClick)*(this.y-yClick)<2)){
+			this.velocity[0] = 0;
+			this.velocity[1] = 0;
+}
+    }
+		this.crashWith();
+		this.x += this.velocity[0];
+		this.y += this.velocity[1];
+	}
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]];
+		this.collision = [0,0];
+		this.cardinal = [[0,-1, 3/4],[0,1,1/4],[-1,0,0],[1,0,1/2]];
+    this.crashWith = function() {
+			for(let a of this.cardinal){
+				var i = a[0];
+				var j =a[1];
+				this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+				if((wallcheck(this.j()-j,this.i()-i) !=0)&&((this.meme[i+1][j+1]-30)*-(i+j)>30-this.radius)){
+					if(true){
+							this.velocity[1] = i*i*this.velocity[1];
+							this.velocity[0] = j*j*this.velocity[0];
+						} else {
+							this.velocity = [0,0];
+						}
+					if(this.ai){
+						this.ai.lastWall = [a[2],3];
+
+					}
+
+					return(a);
+
+				}
+			}
+
+		/*	if(((wallcheck(this.j()-1,this.i()) != 0 )&&(this.rely()+this.velocity[1]<= 25))||((wallcheck(this.j()+1,this.i()) != 0 )&&(this.rely() +this.velocity[1] >= 35)) ) {
+						this.velocity[1] = 0;
+						return;
+					} else if(((wallcheck(this.j(),this.i()-1) != 0 )&&(this.relx() + this.velocity[0] <= 25)) ||((wallcheck(this.j(),this.i()+1) != 0 )&& (this.relx() + this.velocity[0] >= 35)) ) {
+						this.velocity[0] = 0;
+						return;
+    }*/
+					for (i=-1;i<=1;i=i+2){
+						for(j = -1; j<=1; j = j+2){
+							if((wallcheck(this.j()+j,this.i()+i)!=0)&&(distance(this.relx()+this.velocity[0],this.rely()+this.velocity[1],(1+i)*30,(1+j)*30)<=this.radius)){
+								if(this.velocity[0]*this.velocity[0]>this.velocity[1]*this.velocity[1]){
+									this.velocity[0] = 0;
+								}	else{
+
+									this.velocity[1] = 0;
+								}
+									/*	this.x += -0.5*this.velocity[0];
+										this.y += -0.5*this.velocity[1];
+										this.velocity = [0,0];*/
+
+									if(this.ai){
+										if([i,j] = [-1,-1]){
+											this.ai.lastWall = [7/8,3];
+										} else if([i,j] = [-1,1]){
+											this.ai.lastWall = [1/8,3];
+										}	else if([i,j] = [1,1]){
+											this.ai.lastWall = [3/8,3];
+										}	else if([i,j] = [1,-1]){
+											this.ai.lastWall = [5/8,3];
+										};
+
+									}
+									return [i,j];
+
+				}
+			}
+		}
+		}
+}
+
+
+function gameElement(type, index, coordinates, direction) {
+    this.type = type;
+		this.index = index;
+		this.x = coordinates[0];
+    this.y = coordinates[1];
+		this.velocity = [0,0];
+
+		this.updateSpeed = function(){
+			this.velocity[0] = this.speed*this.direction[0];
+			this.velocity[1] = this.speed*this.direction[1];
+		};
+		this.relx = function() {
+			return (this.x - 60* this.i());
+		};
+		this.rely = function() {
+			return (this.y - 60 * this.j());
+		};
+
+		this.i = function(){
+			return (Math.floor(this.x/60));
+		};
+		this.j = function(){
+			return (Math.floor(this.y	/60));
+		};
+		this.onload = function(){
+			this.updateSpeed();
+		}
+    this.update = function() {
+        ctx = myGameArea.context;
+				this.newPos();
+      ctx.fillStyle = this.color;
+			ctx.beginPath();
+			ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+      ctx.fill();
+    };
+
+		this.direction  = direction;
+    this.newPos = function() {
+			if(this.type == "Player"){
+        if(((this.x-xClick)*(this.x-xClick)<2)&&((this.y-yClick)*(this.y-yClick)<2)){
+			this.velocity[0] = 0;
+			this.velocity[1] = 0;
+}
+    }
+		this.crashWith();
+		this.x += this.velocity[0];
+		this.y += this.velocity[1];
+	}
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]];
+		this.ricochet = function(dir) {
+			var k = dir[0];
+			var l = dir[1];
+			if((k==0)||(l==0)){
+				this.velocity[0] = ((l-1)*(l+1)+l*l)*this.velocity[0];
+				this.velocity[1] = ((k-1)*(k+1)+k*k)*this.velocity[1];
+			} else {
+				this.velocity[0] = -this.velocity[0];
+				this.velocity[1] = -this.velocity[1];
+			}
+			this.bounces = this.bounces -1
+		}
+		this.collision = [0,0];
+		this.kill = function(){
+				delete bullets["b"+this.index];
+		};
+		this.cardinal = [[0,-1],[0,1],[-1,0],[1,0]];
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+		this.inside = 1;
+    this.crashWith = function() {
+			this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+			var inside = 0;
+			for(var i in players) {
+				if(collideWith(this,players[i])){
+					if(!this.inside){
+						this.kill();
+						players[i].kill();
+					}
+					inside = 1;
+				}
+			}
+			this.inside = inside;
+			for(var i in bullets) {
+				if(bullets[i]!=this){
+				if(collideWith(this,bullets[i])){
+						this.kill();
+						bullets[i].kill();
+				}
+				}
+			}
+
+
+
+			for(let a of this.cardinal){
+				var i = a[0];
+				var j =a[1];
+				if((wallcheck(this.j()-j,this.i()-i) !=0)&&((this.meme[i+1][j+1]-30)*-(i+j)>30-this.radius)){
+					if(this.bounces >0){
+							this.ricochet(a);
+					} else{
+								this.kill();
+						}
+					return(a);
+				}
+			}
+
+		/*	if(((wallcheck(this.j()-1,this.i()) != 0 )&&(this.rely()+this.velocity[1]<= 25))||((wallcheck(this.j()+1,this.i()) != 0 )&&(this.rely() +this.velocity[1] >= 35)) ) {
+						this.velocity[1] = 0;
+						return;
+					} else if(((wallcheck(this.j(),this.i()-1) != 0 )&&(this.relx() + this.velocity[0] <= 25)) ||((wallcheck(this.j(),this.i()+1) != 0 )&& (this.relx() + this.velocity[0] >= 35)) ) {
+						this.velocity[0] = 0;
+						return;
+    }*/
+					for (i=-1;i<=1;i=i+2){
+						for(j = -1; j<=1; j = j+2){
+							if((wallcheck(this.j()+j,this.i()+i)!=0)&&(distance(this.relx()+this.velocity[0],this.rely()+this.velocity[1],(1+i)*30,(1+j)*30)<=this.radius)){
+								if(this.bounces>0){
+									this.ricochet([i,j]);
+								}	else{
+											this.kill();
+									}
+									return [i,j];
+							}
+				}
+			}
+		}
+		}
+
+function distance(x1, y1, x2, y2){
+	var re =  Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2)	);
+	return re;
+}
+function collideWith(t1,t2){
+	if(distance(t1.x,t1.y,t2.x,t2.y) <= (t1.radius + t2.radius)){
+
+		return true;
+	}
+	return false;
+}
+function wallcheck(y,x){
+	if((x<0)||(x>=display1[0].length)||(y<0)||(y>=display1.length)){
+		return 1;
+	}
+	else{
+		return display1[y][x];
+	}
+}
+function updateGameArea() {
+
+    myGameArea.clear();
+    myField.update();
+		for(var i in players) {
+			players[i].update();
+		}
+	for(var i in bullets) {
+		bullets[i].update();
+	}
+}
+function objectDistance(t1, t2){
+	return distance(t1.x, t1.y, t2.x, t2.y);
+}
+function direc(x1,y1,x2,y2){
+	var dist = distance(x1,y1,x2,y2);
+	return [(x2 - x1)/dist,(y2 - y1)/dist];
+}
+function lineOfSight(t1, t2){
+	var x1 = t1.x;
+	var x2 = t2.x;
+	var y1 = t1.y;
+	var y2 = t2.y;
+	var m =  (y1-y2)/(x1-x2);
+	var b = y1- m*x1;
+	for(i = 60*Math.ceil(x1/60) ; i<x2; i+= 60){
+		var l = Math.floor((m*i+b)/60);
+		var k = Math.floor(i/60);
+		if(wallcheck(l, k)){
+			return false;
+		};
+	};
+	for(i = 60*Math.ceil(y1/60) ; i<y2; i+= 60){
+		var l = i/60;
+		var k = Math.floor((i-b)/(m*60));
+		if(wallcheck(l, k)){
+			return false;
+		};
+	}
+	return true;
+
+}
+
+
+
+myGamePiece = new character("Player", 0, [150, 100]);
+assignValues(myGamePiece);
+
+function assignValues(object){
+	for(var abc in classes[object.type]){
+		object[abc] = classes[object.type][abc];
+	}
+	object.onload();
+	//console.log(object)
+};
+startGame();
+
+
+</script></html>
