@@ -1,0 +1,2621 @@
+<html>
+
+	<!--
+		website for accessories: https://stackoverflow.com/questions/6488390/can-you-layer-pictures-on-top-of-each-other-on-a-webpage
+	-->
+
+<head>
+	<style>
+		body {
+			font-family: "Lato", sans-serif;
+		}
+
+		#hi {
+			z-index: 90;
+		}
+
+		#main {
+			position: relative;
+			width: 1200px;
+			height: 600px;
+			overflow-x: hidden;
+			overflow-y: hidden;
+		}
+
+		#playButton {
+			position: absolute;
+			left: 9.5%;
+			top: 51%;
+			z-index: 90;
+
+			width: 240px;
+			height: 90px;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 16px;
+			background-image: url("images/Play Button 1.png");
+			animation: playButton 1s linear;
+		}
+
+		#playButton:hover {
+			position: absolute;
+			left: 9.5%;
+			top: 51%;
+			z-index: 90;
+
+			width: 240px;
+			height: 90px;
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 16px;
+			background-image: url("images/Play Button 2.png");
+		}
+
+		@keyframes playButton {
+			0% {left:0%; top:51%;}
+			100% {left:9.5%; top:51%;}
+		}
+
+		@keyframes playButtonReverse {
+			0% {left:9.5%; top:51%;}
+			100% {left:100%; top:51%;}
+		}
+
+		#navButton {
+			position: absolute;
+			left: 9.5%;
+			top: 71%;
+			z-index: 90;
+
+			width: 240px;
+			height: 90px;
+
+			background-image: url("images/Customize Button 1.png");
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 16px;
+			animation: navButton 1s linear;
+		}
+
+		#navButton:hover {
+			position: absolute;
+			left: 9.5%;
+			top: 71%;
+			z-index: 90;
+
+			width: 240px;
+			height: 90px;
+
+			background-image: url("images/Customize Button 2.png");
+			border: none;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 16px;
+		}
+
+		@keyframes navButton {
+			0% {left:0%; top:71%;}
+			100% {left:9.5%; top:71%;}
+		}
+
+		@keyframes navButtonReverse {
+			0% {left:9.5%; top:71%;}
+			100% {left:100%; top:71%;}
+		}
+
+		#background1 {
+			position:absolute;
+			z-index: 10;
+		}
+
+		#background2 {
+			position:absolute;
+			z-index: 10;
+		}
+
+		@keyframes background1Reverse {
+			0% {left:0%; top:0%;}
+			100% {left:100%; top:0%;}
+		}
+
+		@keyframes background2Reverse {
+			0% {left:0%; top:0%;}
+			100% {left:100%; top:0%;}
+		}
+
+		#introTitle {
+			position:absolute;
+			animation: introTitle 1s ease-in;
+			z-index: 20;
+		}
+
+		@keyframes introTitle {
+			0% {left:100%; top:0%;}
+			100% {left:0%; top:0%;}
+		}
+
+		@keyframes introTitleReverse {
+			0% {left:0%; top:0%;}
+			100% {left:100%; top:0%;}
+		}
+
+		#characterImage {
+			height: 400px;
+			width: 400px;
+			position:relative;
+			background-image: url("images/Intro Screen Cricher Pink.png");
+			animation: characterImage 2s ease;
+			left: 35%;
+			top: 38%;
+			z-index: 20;
+		}
+
+		@keyframes characterImage {
+			0% {left:35%; top:150%;}
+			100% {left:35%; top:38%;}
+		}
+
+		@keyframes characterImageReverse {
+			0% {left:37%; top:28%;}
+			100% {left:37%; top:100%;}
+		}
+
+		#sidenav {
+			height: 100%;
+			width: 0;
+			position: absolute;
+			z-index: 100;
+			top: 0;
+			right: 0;
+			opacity: 0.95;
+			filter: alpha(opacity=98);
+			background-color: #111;
+			overflow-x: hidden;
+			transition: 0.5s;
+			padding-top: 60px;
+		}
+
+		#sidenav a {
+			padding: 8px 8px 8px 32px;
+			text-decoration: none;
+			font-size: 25px;
+			color: #818181;
+			display: block;
+			transition: 0.3s;
+		}
+
+		#sidenav a:hover {
+			color: #f1f1f1;
+		}
+
+		#sidenav #closebtn {
+			position: absolute;
+			top: 0;
+			right: 25px;
+			font-size: 36px;
+			margin-left: 50px;
+		}
+
+		#characterRed {
+			background-color: #e75351;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 17%;
+			top: 15%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterOrange {
+			background-color: #f08050;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 57%;
+			top: 15%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterYellow {
+			background-color: #f0bf50;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 17%;
+			top: 35%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterGreen {
+			background-color: #91c954;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 57%;
+			top: 35%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterTurquoise {
+			background-color: #49ccaa;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 17%;
+			top: 55%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterBlue {
+			background-color: #56a8ea;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 57%;
+			top: 55%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterPurple {
+			background-color: #926ddb;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 17%;
+			top: 75%;
+			width: 70px;
+			height: 70px;
+		}
+
+		#characterPink {
+			background-color: #f78ab2;
+			cursor: pointer;
+			border-radius: 16px;
+			position: absolute;
+			left: 57%;
+			top: 75%;
+			width: 70px;
+			height: 70px;
+		}
+
+		@media screen and (max-height: 450px) {
+			.sidenav {padding-top: 15px;}
+			.sidenav a {font-size: 18px;}
+		}
+		.me {
+		  box-sizing: border-box;
+		}
+		/* Sets universal font family */
+		* {
+		  font-family: tahoma;
+		}
+		/* Box that holds hangman canvas */
+		#picBox {
+		  background-color: #0099FF;
+		  width: 400px;
+		}
+		/* This is the big interface that holds keyboard, wordbox, text boxes, hangmant picture*/
+		.canvasBox {
+		  width: 400px;
+		  height: 400px;
+		  float: right;
+		  margin-right: 80px;
+		  margin-top: -200px;/*Starts above the visible screen, is loaded in with js */
+		}
+		/*Box that holds mystery word */
+		.wordBox {
+		  border-style: solid;
+		  width: 600px;
+		  height: 100px;
+		  position: absolute;
+		  border-radius: 20px;
+		  text-align: center;
+		  padding-top: 30px;
+		  background-color: #141414;
+		  color: white;
+		  font-size: 50px;
+		  font-family: tahoma;
+		  font-weight: bold;
+		}
+		/*Holds buttons */
+		#button-box {
+		  position: absolute;
+		  width: 600px;
+		  top: 300px;
+		  left: 50px;
+		}
+		/*button effect keyframe animation, is applied for all buttons*/
+		.blip-effect {
+		  -webkit-animation: button-bounce 2200ms forwards infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+		  animation: button-bounce 2200ms forwards infinite cubic-bezier(0.165, 0.84, 0.44, 1);/*Used the built in firefox tool to do this animation,*/
+			/*much easier than plugging in numbers*/
+		  -webkit-transition: all 0.3s ease;
+		  transition: all 0.3s ease;
+		}
+
+		@-webkit-keyframes button-bounce {/* Key frames for button effect animation */
+		  0% {
+		    transform: scale(1);
+		  }
+
+		  10% {
+		    transform: scale(0.96);
+		  }
+
+		  20% {
+		    transform: scale(1.04);
+		  }
+
+		  52%,
+		 100% {
+		    transform: scale(1);
+		  }
+		}
+
+		@keyframes button-bounce {
+		  0% {
+		    transform: scale(1);
+		  }
+
+		  5% {
+		    transform: scale(0.96);
+		  }
+
+		  12% {
+		    transform: scale(1.04);
+		  }
+
+		  52%,
+		 100% {
+		    transform: scale(1);
+		  }
+		}
+
+		@-webkit-keyframes button-blip {
+		  0% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0;
+		  }
+
+		  10% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0.7;
+		  }
+
+		  30%,
+		 99% {
+		    transform: scaleX(1.15) scaleY(1.35);
+		    opacity: 0.3;
+		  }
+
+		  100% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0;
+		  }
+		}
+
+		@keyframes button-blip {
+		  0% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0;
+		  }
+
+		  12% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0.7;
+		  }
+
+		  30%,
+		 99% {
+		    transform: scaleX(1.15) scaleY(1.35);
+		    opacity: 0;
+		  }
+
+		  100% {
+		    transform: scaleX(1) scaleY(1);
+		    opacity: 0;
+		  }
+		}
+
+		.blip-effect.BUTTON-1 {
+		  padding-left: 1em !important;
+		}
+
+		body #page-container .blip-effect.BUTTON-1,
+		body #page-container .blip-effect.BUTTON-1:hover {
+		  padding-right: 1em !important;
+		}
+
+		.blip-effect.BUTTON-1:before {
+		  margin-left: -0.62em !important;
+		  width: 100% !important;
+		}
+
+		input[type=text], select {/* This is for the username input box */
+		  width: 600px;
+		  padding-top: 15px;
+		  padding-bottom: 12px;
+		  padding-right: 12px;
+		  padding-left: 12px;
+		  display: inline-block;
+		  border: 2px solid rgba(180,180,180,1.00);
+		  border-radius: 12px;
+		  box-sizing: border-box;
+		  font-size: 48px;
+		  text-align: right;
+		  color: rgba(80,80,80,1.00);
+		  outline: none;
+		}
+
+		.button {/* button tag*/
+		  border: none;
+		  color: rgba(50,50,50,1.00);
+		  padding-top: 6px;
+		  padding-bottom: 6px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 24px;
+		  cursor: pointer;
+		  border-radius: 9px;
+		  outline: none;
+		  animation: button-bounce 600ms forwards 1 cubic-bezier(.08,.82,.17,1);
+		  animation-play-state: paused;
+		  transition: all 0.2s ease;
+		}
+
+		.blip {
+		  top: 0px;
+		}
+
+		input::placeholder {/* This is for the placeholder in the username box, greys it out a little */
+		  color: rgba(200,200,200,1.00);
+		}
+
+
+		.blip::before {
+		  background-color: lightGray !important;
+		  content: "" !important;
+		  display: block !important;
+		  top: 0px !important;
+		  height: 115% !important;
+		  width: 100%;
+		  border-radius: 12px;
+		  left: 0px;
+		  animation: button-blip 600ms forwards 1 cubic-bezier(.08,.82,.17,1);
+		  animation-play-state: running;
+		  position: absolute;
+		}
+
+		.equal {
+		  background-color: rgba(80,190,70,1.00);
+		  width: 100%;
+		  height: 65px;
+		}
+
+		.equal:hover {
+		  background-color: rgba(80,210,90,1.00);
+		}
+
+		.equal:active {
+		  transform: translateY(4px);
+		}
+
+
+		.title {
+		  text-align: center;
+		  font-size: 48px;
+		  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+		}
+
+		.subscript {
+		  text-align: center;
+		  font-size: 12px;
+		  color: gray;
+		  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+		}
+
+		.keyboard {
+		  margin: 5px;
+		}
+
+		.midline {
+		  position: absolute;
+		  width: 1px;
+		  background-color: black;
+		  height: 100%;
+		  left: 50%;
+		}
+
+		#floatBox {/*Username input box, all of these boxes have opacity of 0 and height of -200 because they start invisible above the screen */
+		  height: 200px;
+		  width: 100%;
+		  opacity: 0;
+		  top: -200px;
+		}
+
+		#endScreen {/* End screen box */
+		  height: 200px;
+		  width: 100%;
+		  opacity: 0;
+		  top: -200px;
+		}
+
+		.floatBox {/* general class for all floating boxes */
+		/*	border-style: solid;*/
+		  text-align: center;
+		  transition-duration: 1s;
+		  position: absolute;
+		}
+
+		#rightBox {/* Enter button box that comes in from the right */
+		  top: 350px;
+		  width: 200px;
+		  opacity: 0;
+		  right: -20%;
+		}
+
+		#canvas {/*not the actual canvas element, I just called my big gui holder thing canvas */
+		  overflow: hidden;
+		  width: 0;
+		  position: relative;
+		  opacity: 0;
+		  transition-duration: 2s;
+		  height: 600px;
+		}
+
+		#menuIcon {
+		  position: absolute;
+		  right: 0;
+		  top: 0px;
+		  color: white;
+		  background-color: black;
+		  width: 75px;
+		  height: 60px;
+		  border-radius: 30px 0px  0px 30px;
+		  transition-duration: 0.5s;
+		  padding-top: 10px;
+		}
+
+		.subline {/*This is an underline  */
+		  border-radius: 8px;
+		  width: 50%;
+		  height: 4px;
+		  background-color: white;
+		  margin-top: 10px;
+		  margin-left: 25%;
+		}
+		/*Was originally going to use a menu, but I didn't have time to fully implement it, but I didn't want to get rid of it  */
+		/*In case I need to use somethign similar on another project in the future */
+		#menu {
+		  position: absolute;
+		  width: 300px;
+		  right: -300px;
+		  background-color: black;
+		  color: white;
+		  height: 100%;
+		  top: 0px;
+		  transition-duration: 0.5s;
+		}
+
+		.menuOption {
+		  width: 100%;
+		  transition-duration: 0.5s;
+		  font-size: 24px;
+		  height: 50px;
+		}
+
+		.menuOption:hover {
+		  background-color: grey;
+		}
+
+		#menuIcon:hover {
+		  background-color: grey;
+		}
+
+		.menuText {
+		  padding-top: 10px;
+		}
+
+		#topbox {
+		  height: 200px;
+		  width: 100%;
+		  opacity: 0;
+		  top: -200px;
+		}
+
+
+		.num {
+		  background-color: rgba(215,215,215,1.00);
+		  width: 65px;
+		  height: 65px;
+		}
+
+		.blip::before {
+		  background-color: lightGray !important;
+		  content: "" !important;
+		  display: block !important;
+		  top: 0px !important;
+		  height: 115% !important;
+		  width: 100%;
+		  border-radius: 12px;
+		  left: 0px;
+		  animation: button-blip 600ms forwards 1 cubic-bezier(.08,.82,.17,1);
+		  animation-play-state: running;
+		  position: absolute;
+		}
+
+		.num:hover {
+		  background-color: rgba(240,240,240,1.00);
+		}
+
+		.equal {
+		  background-color: rgba(80,190,70,1.00);
+		  width: 100%;
+		  height: 65px;
+		}
+
+		.equal:hover {
+		  background-color: rgba(80,210,90,1.00);
+		}
+
+		.equal:active {
+		  transform: translateY(4px);
+		}
+
+		.operator1 {
+		  background-color: rgba(180,225,245,1.00);
+		  width: 65px;
+		  height: 65px;
+		}
+
+		.operator1:hover {
+		  background-color: rgba(200,245,255,1.00);
+		}
+
+		.operator1:active {
+		  transform: translateY(4px);
+		}
+
+		.operator2 {
+		  background-color: rgba(140,170,190,1.00);
+		  width: 65px;
+		  height: 65px;
+		}
+
+		.operator2:hover {
+		  background-color: rgba(180,210,230,1.00);
+		}
+
+		.operator2:active {
+		  transform: translateY(4px);
+		}
+
+		.del {
+		  background-color: rgba(255,130,130,1.00);
+		  width: 65px;
+		  height: 65px;
+		}
+
+		.del:hover {
+		  background-color: rgba(255,165,165,1.00);
+		}
+
+		.del:active {
+		  height: 65px;
+		  transform: translateY(4px);
+		}
+
+		.title {
+		  text-align: center;
+		  font-size: 48px;
+		  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+		}
+
+		.subscript {
+		  text-align: center;
+		  font-size: 12px;
+		  color: gray;
+		  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, "sans-serif";
+		}
+
+		.keyboard {
+		  margin: 5px;
+		}
+
+		.username {
+			font-size: 72px;
+		}
+	</style>
+</head>
+<body>
+
+<body style="overflow:hidden">
+	
+	<div id = "main">
+	<img id = "background1" src = "images/Game Intro Screen BG.png">
+	<img id = "background2" src = "images/Game Intro Screen Hill.png">
+	<img id = "introTitle" src = "images/Game Intro Screen Title.png">
+	<div id = "characterImage"></div>
+
+
+	<div id = "sidenav">
+		<a href = "javascript:void(0)" id = "closebtn" onclick = "closeNav()">&times;</a>
+		<button onclick = "cricherRed()" id = "characterRed" value = "1"></button>
+		<button onclick = "cricherOrange()" id = "characterOrange" value = "2"></button>
+		<button onclick = "cricherYellow()" id = "characterYellow" value = "3"></button>
+		<button onclick = "cricherGreen()" id = "characterGreen" value = "4"></button>
+		<button onclick = "cricherTurquoise()" id = "characterTurquoise" value = "5"></button>
+		<button onclick = "cricherBlue()" id = "characterBlue" value = "6"></button>
+		<button onclick = "cricherPurple()" id = "characterPurple" value = "7"></button>
+		<button onclick = "cricherPink()" id = "characterPink" value = "8"></button>
+	</div>
+
+	<button id = "playButton" onclick = "master()"></button>
+	<button id = "navButton" onclick = "openNav()"></button>
+
+	</div>
+	<script>
+		var colour = "";
+
+		function openNav() {
+			document.getElementById("sidenav").style.width = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("sidenav").style.width = "0";
+		}
+
+		function cricherRed() {
+			colour = document.getElementById("characterRed").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Red.png')";
+		}
+		function cricherOrange() {
+			colour = document.getElementById("characterOrange").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Orange.png')";
+		}
+		function cricherYellow() {
+			colour = document.getElementById("characterYellow").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Yellow.png')";
+		}
+		function cricherGreen() {
+			colour = document.getElementById("characterGreen").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Green.png')";
+		}
+		function cricherTurquoise() {
+			colour = document.getElementById("characterTurquoise").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Turquoise.png')";
+		}
+		function cricherBlue() {
+			colour = document.getElementById("characterBlue").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Blue.png')";
+		}
+		function cricherPurple() {
+			colour = document.getElementById("characterPurple").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Purple.png')";
+		}
+		function cricherPink() {
+			colour = document.getElementById("characterPink").value;
+			document.getElementById('characterImage').style.backgroundImage = "url('images/Intro Screen Cricher Pink.png')";
+		}
+
+		function master() {
+
+			document.getElementById("introTitle").style.animation = "introTitleReverse 0.5s linear forwards";
+			
+			//document.getElementById("characterImage").remove();
+
+			document.getElementById("characterImage").style.animation = "characterImageReverse 0.5s linear forwards";
+
+			document.getElementById("navButton").style.animation = "navButtonReverse 0.5s linear forwards";
+
+			document.getElementById("playButton").style.animation = "playButtonReverse 0.5s linear forwards";
+			
+			document.getElementById("sidenav").remove();
+
+			setTimeout(function(){
+				document.getElementById("background1").remove();
+				document.getElementById("background2").remove();
+				startGame();
+				
+				setTimeout(function(){
+					alert("Press 'W' to Shoot \nPress 'E' to Deploy Bomb\nPress 'i' to Advance To Next Level");
+				}, 500);
+			}, 1250);
+			
+			
+
+
+		}
+
+	</script>
+ </div>
+ <div id="floatBox" class="floatBox"><!-- The box holding the username input that drops down at the beginning of the game -->
+	 <div class = "username" id="screen">Click To Go To...</div>
+ </div>
+ <div id='topbox' class="floatBox"><!-- The box that drops down when a level is cleared-->
+	 <div style ="font-size: 72px">
+Level Cleared
+</div>
+	 <div id = "correctBox" style = "font-size : 24px; color: green;"></div><!--Displays # of correct guesses -->
+	 <div id = "incBox" style = "font-size : 24px; color: red;"></div><!--Displays # of incorrect guesses -->
+	 <div id = "pointsBox" style = "font-size : 24px; color: blue;"></div><!--Displays # of total points -->
+	 <div style="width: 200px; position:absolute; left:700px; top: 200px;"><!-- Next game button -->
+		 <button class = "button equal blip" onclick="hideTop()">Next </button>
+	 </div>
+ </div>
+ <div id = "rightBox" class="floatBox"><!-- At the beggining of game the enter button that slides in from the side  -->
+	 <button class = "button equal blip" onclick="hideInput()">Next Level </button>
+ </div>
+ <div id = "endScreen" class="floatBox"><b><!-- Either the Game Over screen or the Victory screen -->
+	 <div id = "result" style = "font-size : 48px;">
+</div></b>
+<div id = "percentBox" style = "font-size : 24px;"></div><!-- Shows total % of correct guesses -->
+<div id = "pointsBox2" style = "font-size : 24px; color: black;"></div><!-- Shows total points -->
+<div style="width: 200px; position:absolute; left:700px; top: 200px;">
+<button id = "playagain" class = "button equal blip" >Play Again </button><!-- Play again button  -->
+</div>
+<div style="width: 200px;  position:absolute; left:700px; top: 275px;">
+<button id = "exit" class = "button equal blip" style = "background-color:crimson;" >Exit </button><!-- Exit button  -->
+</div>
+
+ </div>
+</body>
+</html>
+
+<html>
+<link rel="icon" href="Images/cursor.png" class="image/x-icon"/>
+<style>
+body,td,th {
+	font-family: Calibri;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#container {
+	width: 1200px;
+
+	height: 600px;
+	cursor: url('Images/Cursor.png'), default;
+	overflow: hidden;
+	position: relative;
+}
+
+canvas {
+	background-image:url("images/Grass BG Tesselated Less.png");
+	cursor: url('Images/Cursor.png'), default;
+}
+</style>
+
+<body>
+
+
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+</script>
+<script src = "Game_Fields.js">
+</script>
+<script>
+var round = 0;
+var blockLine = [];
+var topBox = document.getElementById("topbox")
+var box = document.getElementById("button-box");
+var rightBox = document.getElementById("rightBox");
+var dropBox = document.getElementById("floatBox");
+var canvas = document.getElementById("canvas");
+var resBox = document.getElementById("result")
+var endBox = document.getElementById("endScreen");
+var perBox = document.getElementById("percentBox");
+var mystWord = "";
+var myst = "";
+var display =  [
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+				[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+			];
+
+	var display1;
+
+function resetFields() {
+ fields = 	[
+		[
+				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+					[0, 1, 0, 15, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+					[0, 1, 0, 1, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+					[0, 1, 0, 10, 1, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+					[0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0],
+					[0, 1, 1, 2, 1, 1, 0, 0, 0, 11, 0, 0, 0, 1,0, 0, 0, 0, 1, 0],
+					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0],
+					[0, 0, 12, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 20, 0, 0, 0],
+					[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
+				], [
+		[0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 2, 11, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 1, 0, 0, 0, 2, 0, 20, 0],
+		[0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0],
+		[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+		[0, 0, 12, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 20, 10, 0, 0],
+		[0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 2, 0, 0, 0, 15, 0, 3, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0]
+	], [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+		[0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0],
+		[3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 2, 3, 3, 2, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	], [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 20, 0, 0],
+		[0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 1, 3, 2, 3],
+		[3, 3, 3, 1, 2, 1, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0],
+		[0, 0, 0, 15, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	], [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 0, 0, 2, 1, 2, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+		[0, 0, 1, 0, 0, 0, 15, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 1, 1, 0],
+		[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 1, 1, 2, 1, 2, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	], [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 15, 0, 0, 11, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	],
+
+	 [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 11, 15, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	],
+
+	  [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+		[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 1, 0, 0],
+		[0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+		[0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+		[0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 0, 11, 0, 0, 2, 0, 0],
+		[0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+		[0, 0, 1, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+		[0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	],
+
+	  [
+		[0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 20, 0],
+		[0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[3, 3, 3, 3, 3, 0, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+		[0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0],
+		[3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 11, 3, 0, 3, 0, 3, 3, 3],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0],
+		[0, 0, 15, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 0]
+	], [
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	]
+	]
+}
+
+var fields;
+function squares() {
+					for (j = 0; j < display1.length; j++) {
+						for (i = 0; i < display1[j].length; i++) {
+							if (display1[j][i] != 0) {
+								loadKey[display1[j][i]].load(i,j);
+
+						}
+					}
+				}
+			}
+var playerCounter = 0;
+var xClick= 0;
+var yClick=0;
+
+console.log(blockLine);
+
+var myGamePiece;
+var player;
+var bullets = {};
+var tiles = {};
+var powerups = {};
+var players = {};
+var counter = 0;
+var tileCounter = 0;
+var powerupCounter = 0;
+var mousePosition = {x:0, y:0};
+
+window.addEventListener('keydown', function(){
+	var n = event.which;
+	if(n == 87) {
+		var dist = distance(mousePosition.x, mousePosition.y, myGamePiece.x, myGamePiece.y);
+		myGamePiece.shootHandle([(mousePosition.x - myGamePiece.x)/dist,(mousePosition.y - myGamePiece.y)/dist]);
+	} else if(n==32||n==69){
+		myGamePiece.mine();
+
+		return;
+	} else if(String.fromCharCode(n)=="p"||String.fromCharCode(n)=="P"){
+		clearInterval(myGameArea.interval);
+	} else if(String.fromCharCode(n)=="O"){
+		myGameArea.interval = setInterval(updateGameArea, -200);
+	} else if (String.fromCharCode(n)=="K"){
+		enemy1.ai.dropBomb();
+	}
+	else if (String.fromCharCode(n)=="I"){
+		endGame(true);
+	}else if (String.fromCharCode(n)=="U"){
+		endGame(false);
+	}
+
+
+
+
+}, true);
+
+function pause() {
+	clearInterval(myGameArea.interval);
+	console.log("in")
+}
+function resume() {
+
+	myGameArea.interval = setInterval(updateGameArea, -200);
+}
+function startGame() {
+		display1 = fields[round];
+    myField = new blocks();
+    myGameArea.start();
+		squares();
+	console.log(fields[round]);
+}
+var loadKey = {
+	20 : {
+		load : function(i,j){
+
+			enemy1 = new character("Enemy1", playerCounter, [60*i+30, 60*j+30]);
+			assignValues(enemy1);
+		 display1[j][i] = 0;
+			players[playerCounter] = enemy1;
+			//console.log(enemy1)
+			playerCounter++;
+		},
+	},
+	1 : {
+		load : function(i,j){
+				Block = {posx: 60*i, posy : 60*j , isDead : false, color : "black", source : false, type : 1,};
+				Block.source =  new Image();
+				Block.source.src = ("images/Wall Blocks 1A Wood.png");
+				blockLine.push(Block);
+		},
+	},
+	2 : {
+		load : function(i, j){
+			Block = {posx: 60*i, posy : 60*j , isDead : false, color : "black", source : false, type : 2,};
+			Block.source =  new Image();
+			Block.source.src = ("images/Wall Blocks 1Break Wood.png");
+			blockLine.push(Block);
+		}
+	},
+	3 : {
+		load : function(i,j){
+				Block = {posx: 60*i, posy : 60*j , isDead : false, color : "black", source : false, type : 1,};
+				Block.source =  new Image();
+				Block.source.src = ("images/Grass Hole.png");
+				blockLine.push(Block);
+		},
+	},
+	10 : {
+		load : function(i,j){
+			var boost1 = new powerup("Nuclear", powerupCounter, [60*i+30,60*j+30]);
+			assignValues(boost1);
+			display1[j][i] = 0;
+			powerups[powerupCounter] = boost1;
+			powerupCounter++;
+
+		}
+	},
+	12 : {
+		load : function(i,j){
+			var boost1 = new powerup("FastShot", powerupCounter, [60*i+30,60*j+30]);
+			assignValues(boost1);
+		display1[j][i] = 0;
+			powerups[powerupCounter] = boost1;
+			powerupCounter++;
+
+		}
+	},
+	11 : {
+		load : function(i,j){
+			var boost1 = new powerup("SpeedBoost", powerupCounter, [60*i+30,60*j+30]);
+			assignValues(boost1);
+			display1[j][i] = 0;
+			powerups[powerupCounter] = boost1;
+			powerupCounter++;
+
+		}
+	},
+	15 :  {
+		load : function(i,j){
+			myGamePiece = new character("Player", playerCounter, [60*i+30, 60*j+30]);
+			assignValues(myGamePiece);
+			players[playerCounter] = myGamePiece;
+			myGamePiece = players[playerCounter]
+			playerCounter++;
+		 display1[j][i] = 0;
+
+
+		},
+	}
+
+
+
+
+}
+
+
+/* width, color, x, y, class, speed, speedX, speedY*/
+var myGameArea = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = 1200;
+        this.canvas.height = 600;
+		this.canvas.addEventListener('click', function(e){
+		myGamePiece.moveTo(e.pageX,e.pageY);
+	xClick = e.pageX;
+	yClick = e.pageY;
+}, false);
+
+this.canvas.addEventListener('mousemove', function(mouseMoveEvent){
+  mousePosition.x = mouseMoveEvent.pageX;
+  mousePosition.y = mouseMoveEvent.pageY;
+	myGamePiece.angle2 = Math.atan2(mousePosition.x-myGamePiece.x,myGamePiece.y-mousePosition.y);
+},false);
+
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameArea, -200);
+				console.log("interval")
+
+    },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function blocks(){
+	this.update = function(){
+        ctx = myGameArea.context;
+       for(let i of blockLine){
+	if(i.source){
+			//ctx.fillStyle = i.color;
+	ctx.drawImage(i.source, i.posx, i.posy);
+			//ctx.fillRect(i.posx, i.posy, 60, 60);
+		}
+		}
+    }
+}
+
+var altSources = {
+	SpeedBoost : "Images/Power Up Filter Speed Boost.png",
+	FastShot : "Images/Power Up Filter Big Bullets.png",
+	Nuclear : "Images/Power Up Filter Mine Bigger Explosion.png"
+}
+//mark
+var classes = {
+	Player : {
+		radius : 23,
+		color : "yellow",
+		start : [150,100],
+		speed : 3,
+		cooldown : 1000,
+		capacity : 3,
+		//source : function() { insert if statement for customization options }
+		source : "images/Main Character Blue Head.png",
+		source2 : "images/All Purpose Bottom.png",
+		bombClip : 5,
+		bulletType : "Bullet1",
+		lives : 3,
+		lifeSource : "images/Health Bar Outline 1 Full.png",
+	},
+	Bullet2 : {
+		radius : 5,
+		color : "white",
+		speed : 6,
+		bounces : 5,
+		source : "images/Bullet Explosive.png",
+		source2 : "images/Bullet Explosive Big.png",
+	},
+	Bullet1 : {
+		radius : 5,
+		color : "white",
+		speed : 4,
+		bounces : 5,
+		source : "images/Bullet Winter.png",
+		source2 : "images/Bullet Winter Big.png",
+	},
+	Bomb1: {
+		radius : 23,
+		color : "yellow",
+		altColor: "orange",
+		explosionRadius : 80,
+		detonationRange : 50,
+		sources : ["Images/Mine Resting.png","Images/Mine Active.png", "Images/Explosion.png"],
+		spriteWidth : 30,
+		spriteHeight : 30,
+		timeLeft : 5000,
+	},
+
+	Bomb2: {
+		radius : 23,
+		color : "yellow",
+		altColor: "orange",
+		explosionRadius : 160,
+		detonationRange : 50,
+		sources : ["Images/Mine Bigger Explosion Resting.png","Images/Mine Bigger Explosion Active.png", "Images/Explosion.png"],
+		spriteWidth : 30,
+		spriteHeight : 30,
+		timeLeft : 5000,
+	},
+	SpeedBoost : {
+		spriteWidth : 40,
+		spriteHeight : 40,
+		radius : 30,
+
+		sources : ["Images/Power Up Icon Speed Boost.png"],
+		boost : function(){
+			var tempe = new Image();
+			tempe.src = (altSources["SpeedBoost"]);
+			this.target.altSprite2 = tempe;
+
+			this.target.speed += 2;
+			boostTimeout = setTimeout(this.deboost.bind(this), 3000);
+		},
+		deboost : function(){
+			this.target.speed -=2;
+			this.target.altSprite2 = false;
+			this.kill();
+		}
+	},
+
+	FastShot : {
+		spriteWidth : 40,
+		spriteHeight : 40,
+		radius : 30,
+		sources : ["Images/Power Up Icon Big Bullets.png"],
+		boost : function(){
+			var tempe = new Image();
+			tempe.src = (altSources["FastShot"]);
+			this.target.altSprite = tempe;
+			this.target.powerup = "FastShot"
+			for(i = 0; i <3; i++){
+				var bullet = new gameElement("Bullet2", counter, [0,0], [0,0])
+				assignValues(bullet);
+				counter++;
+				this.target.clip.unshift(bullet);
+			};
+			this.kill();
+		},
+		deboost : function(){
+			this.target.speed -=2;
+			this.target.altSprite = false;
+			this.kill();
+
+		}
+	},
+	Nuclear : {
+		spriteWidth : 40,
+		spriteHeight : 40,
+		radius : 30,
+		sources : ["Images/Power Up Icon Mine Bigger Explosion.png"],
+		boost : function(){
+			var tempe = new Image();
+			tempe.src = (altSources["Nuclear"]);
+			this.target.altSprite = tempe;
+			this.target.powerup = "Nuclear"
+				var mine = new gameTile("Bomb2", tileCounter, [0,0]);
+				mine.loadEffect();
+				counter++;
+				this.target.mineClip.unshift(mine);
+			this.kill();
+		},
+		deboost : function(){
+			this.target.speed -=2;
+			this.target.altSprite = false;
+			this.kill();
+
+		},
+	},
+
+	Enemy1 : {
+		radius : 23,
+		color: "red",
+		speed : 3,
+		cooldown : 1000,
+		capacity : 3,
+		matrix : {
+			action : [0,0,01, 80],
+			move : [3,1, 0],
+			defense : [4, 1],
+			dispertion : 1,
+		},
+		detectRange : 80,
+		source : "images/Enemy 1 Head.png",
+		source2 : "images/All Purpose Bottom.png",
+		source3 : "images/Enemy 2 Head.png",
+		bulletType : "Bullet1",
+		bombClip : 5,
+		lives : 2,
+	},
+	Enemy2 : {
+		radius : 23,
+		color: "yellow",
+		speed : 3,
+		cooldown : 1000,
+		capacity : 3,
+		matrix : {
+			action : [0,0,1, 1],
+			move : [3,1, 0],
+			defense : [1, 1],
+			dispertion : 1,
+		},
+		detectRange : 80,
+	},
+
+//function gameElement(radius, color, x, y, type, speed, direction, bounces, index)
+
+}
+function AI(object, matrix){
+	this.random = Math.random();
+	this.moveMatrix = matrix.move;
+	this.actionMatrix = matrix.action;
+	this.defenseMatrix = matrix.defense;
+	this.disp = matrix.dispertion;
+	this.lastWall = [0,5];
+	var moveTimeout;
+	var actionTimeout
+	this.dodging = 0;
+	this.sumProb = function(wh) {
+		var sum = 0;
+		for(let i of matrix[wh]){
+			sum += i;
+		}
+		return sum;
+	}
+	this.kill = function(){
+		clearTimeout(moveTimeout);
+		clearTimeout(actionTimeout);
+	}
+	this.randomMove = function(){
+		this.random = Math.random();
+		//[[0,-1, -Math.PI/2],[0,1,Math.PI/2],[-1,0,Math.PI],[1,0,0]]
+		if(this.lastWall[1]==5){
+			object.direction = [Math.cos(2*Math.PI*this.random),Math.sin(2*Math.PI*this.random)];
+		}	else if((this.random-this.lastWall[0]+1)%(1)<(1/2)){
+			object.direction = [-Math.cos(2*Math.PI*this.random-Math.PI/2),Math.sin(2*Math.PI*this.random-Math.PI/2)];
+
+		} else{
+			object.direction = [-Math.cos(2*Math.PI*this.random+Math.PI/2),Math.sin(2*Math.PI*this.random+Math.PI/2)];
+		}
+		object.angle = Math.atan2(object.direction[0],-object.direction[1]);
+		object.updateSpeed();
+
+		moveTimeout = setTimeout(this.generateMove.bind(this), 500);
+	};
+	this.stop = function(){
+		object.direction = [0,0];
+		object.updateSpeed();
+		this.random = Math.random();
+		moveTimeout = setTimeout(this.generateMove.bind(this), Math.floor(1000*Math.random()));
+	};
+	this.dodge = function(a){
+
+			clearTimeout(moveTimeout);
+			this.random = Math.random();
+			this.xdisp = Math.cos(Math.PI*2*(this.random-0.5)*5);
+			this.ydisp = Math.sin(Math.PI*2*(this.random-0.5)*5);
+			object.moveTo(2*object.x-a.x + this.xdisp,2*object.y-a.y + this.ydisp);
+			moveTimeout = setTimeout(this.generateMove.bind(this),500);
+		return;
+
+	}
+	this.dodge2 = function(a){
+		if(!this.dodging){
+			clearTimeout(moveTimeout);
+			this.random = Math.random();
+			this.xdisp = Math.cos(Math.PI*2*(this.random-0.5)*5);
+			this.ydisp = Math.sin(Math.PI*2*(this.random-0.5)*5);
+			object.moveTo(2*object.x-a.x + this.xdisp,2*object.y-a.y + this.ydisp);
+			moveTimeout = setTimeout(this.generateMove.bind(this),500);
+			this.dodging = 1;
+
+		}
+		return;
+
+	}
+	this.generateDefense = function(a){
+		this.random = this.sumProb("defense")*Math.random();
+		if(this.random < this.defenseMatrix[0]){
+			this.dodge(a);
+		} else if(this.random< this.defenseMatrix[0]  + this.defenseMatrix[1]){
+			this.stop();
+		}
+	}
+	this.generateMove = function() {
+		if(object){
+			this.random = this.sumProb("move")*Math.random();
+			if(this.random < this.moveMatrix[0]){
+				this.randomMove();
+			} else if (this.random<this.moveMatrix[1]+this.moveMatrix[0]){
+				this.stop();
+			} else{
+				this.chaseEnemy();
+			}
+			this.dodging= 0;
+		}
+
+	};
+	this.generateAction = function(){
+		if(object){
+			this.random =  this.sumProb("action")*Math.random();
+			if(this.random < this.actionMatrix[0]){
+				this.shootPlayer();
+			} else if(this.random < this.actionMatrix[0]+this.actionMatrix[1]){
+				this.shootRandom();
+			}	else if(this.random < this.actionMatrix[0] + this.actionMatrix[1] + this.actionMatrix[2]){
+				this.dropBomb();
+			} else {
+				actionTimeout = setTimeout(this.generateAction.bind(this), 500);
+			}
+		}
+
+	};
+	this.shootRandom = function() {
+	//	console.log("hi")
+		this.random = Math.random();
+		if((this.random-this.lastWall[0]+1)%(1)<(1/2)){
+			object.shootHandle([-Math.cos(2*Math.PI*this.random-Math.PI/2),Math.sin(2*Math.PI*this.random-Math.PI/2)]);
+		} else{
+			object.shootHandle([-Math.cos(2*Math.PI*this.random+Math.PI/2),Math.sin(2*Math.PI*this.random+Math.PI/2)]);
+		}
+		actionTimeout = setTimeout(this.generateAction.bind(this),500);
+	}
+	this.shootAt = function(a , x ,y){
+		this.random = Math.random();
+		this.xdisp = Math.cos(Math.PI*2*(this.random-0.5)*this.disp);
+		this.ydisp = Math.sin(Math.PI*2*(this.random-0.5)*this.disp);
+			if(a){
+				object.shootHandle( direc(object.x, object.y,a.x+this.xdisp,a.y+this.ydisp));
+			} else {
+				object.shootHandle(direc(object.x, object.y,x+this.xdisp,y+this.ydisp));
+			}
+		return;
+
+	}
+	this.dropBomb = function(){
+
+		var a = object.mine();
+	 actionTimeout = setTimeout(this.generateAction.bind(this),500);
+
+
+	}
+
+	this.shootPlayer = function() {
+		for(var i in players){
+			if(players[i]!=object){
+				if(!lineOfSight(object, players[i])||!lineOfSight(players[i],object)){
+					this.generateAction();
+					return;
+				} else{
+					this.shootAt(players[i]);
+					actionTimeout = setTimeout(this.generateAction.bind(this),200);
+					return;
+				}
+		}
+	}
+
+	}
+	this.chaseEnemy = function(){
+		for(var i in players){
+			if(players[i]!=object){
+				if(!lineOfSight(object, players[i])||!lineOfSight(players[i],object)){
+					this.generateMove();
+					return;
+				} else{
+					object.moveTo(players[i].x, players[i].y);
+					moveTimeout = setTimeout(this.generateMove.bind(this),200);
+					return;
+				}
+		}
+	}
+
+
+	}
+	this.seeEnemy = function(enemy){
+		if(enemy){
+			this.moveMatrix[2] = 4;
+			this.actionMatrix[0] = 240;
+			object.angle2 = Math.atan2(enemy.x-object.x,object.y-enemy.y);
+		}	else{
+			this.moveMatrix[2] = 0;
+			this.actionMatrix[0] = 0;
+			object.angle2 = object.angle;
+		}
+
+	};
+	this.seeBullet = function(bullet){
+		if(bullet){
+			this.actionMatrix[3] = 5;
+			object.angle2 = Math.atan2(enemy.x-object.x,object.y-enemy.y);
+		} else{
+			this.actionMatrix[3] = 0;
+			object.angle2 = object.angle;
+		}
+	}
+}
+
+var dropInput = function() { //at the beggining of game drops the username input field
+
+ rightBox.style.opacity = "1"; //makes it visible and brings it into the screen
+ rightBox.style.right = "20%"
+ dropBox.style.opacity = "1"
+ dropBox.style.top = "200px";
+
+};
+
+var checkComplete = function() { //checks if the word is complete
+ if (myst.includes("-") == false) { // if the mystery word box doesn't have a dash, it is complete
+  setTimeout(reset, 1000); // call the reset function after a delay
+ }
+}
+
+function playAgain(a) { // when the user presses play again or exit on the end screen, this function is called, resets everything
+//if play again is clicked, the function is called with the argument as true, if exit is clicked the argument is false
+ round = 0; //resets to the first round
+ scores.reload(); //reloads the score, sets everything to 0
+ endBox.style.opacity = "0"; //hides the endBox
+ endBox.style.top = "-200px";
+ reset(); //calls reset function, resets text boxes, words, keyboard etc.
+ if (a) { //if play again is triggered
+  hideTop();
+} else { //if exit is triggered
+  topBox.style.opacity = "0";
+  topBox.style.top = "-200px";
+  dropInput();
+  document.getElementById("screen").value = " ";
+ }
+
+}
+
+function reset() { //reset function, clears text boxes, resets hangman picture, keyboard
+ if (round == 5) { //if level 5 is cleared, game is beaten
+  Gameend(true);
+  return;
+ }
+
+ //wordGenerate(); //generates new word
+ //buttonload(); //resets keyboard
+ canvas.style.transitionDuration = "0.5s";
+ canvas.style.opacity = "0"; //hides the main interface
+ topBox.style.opacity = "1" //brings down the level cleared screen
+ topBox.style.top = "200px";
+ document.getElementById("correctBox").innerHTML = "Correct : " + scores["c" + round]; //shows correct guesses for the round
+ document.getElementById("incBox").innerHTML = "Wrong : " + scores["i" + round];//shows incorrect guesses for the round
+ document.getElementById("pointsBox").innerHTML = "Total Points : " + scores.total();//shows total points for all rounds
+
+ document.getElementById("p1").innerHTML = "Letters picked: None" // resets textboxes
+ document.getElementById("p2").innerHTML = "Guesses : 0"
+
+ guessed = ""; // resets game data
+ incorrect = 0;
+ ctx.clearRect(0, 0, c.width, c.height); // clears the hangman drawing, resets
+ draw[0]();
+ round++; // goes to next level
+ document.getElementById("p3").innerHTML = "Score: " + scores.score(round) + " Level: " + round; // resets text box
+}
+
+function Gameend(res) { //this function is called when either the player dies or has beaten 5 levels, and wins
+// if the player lost, res is called as false, otherwise it is called as true
+ canvas.style.transitionDuration = "0.5s";
+ canvas.style.opacity = "0"; // hides main interface
+ endBox.style.opacity = "1"
+ endBox.style.top = "200px";	//Brings down end game screen
+ if (!res) { //if the user lost, turns text red, displays defeat screen
+  resBox.style.color = "Red";
+  resBox.innerHTML = "Defeat";
+  perBox.style.color = "Red";
+} else { // if user won, turns text green, displays victory screen
+  resBox.style.color = "Green";
+  resBox.innerHTML = "Victory"
+  perBox.style.color = "Green";
+ }
+ perBox.innerHTML = "Guess Percentage: " + scores.percent() + "%"; //shows guess percentage
+ document.getElementById("pointsBox2").innerHTML = "Total Points : " + scores.total(); //shows total score
+
+
+}
+
+function hideTop() { //hides the level complete screen
+ canvas.style.width = "auto";
+ canvas.style.opacity = "1";
+ topBox.style.opacity = "0";
+ topBox.style.top = "-200px";
+
+}
+var hideInput = function() { //hides the username input screen
+ rightBox.style.opacity = "0";
+ rightBox.style.right = "-20%"
+ dropBox.style.opacity = "0"
+ dropBox.style.top = "-200px";
+setTimeout(function(){
+	myGameArea.canvas.style.width = "auto";
+  myGameArea.canvas.style.opacity = "1";
+	startGame();
+	myGamePiece.lives = livesLeft;
+}, 1000);
+
+
+
+}
+
+
+
+var wordGenerate = function() { //generates a new random word
+ myst = "";
+ var range = words.length;
+ mystWord = words[Math.floor(Math.random() * range)] //random generates a word
+ for (i = 0; i < mystWord.length; i++) {
+  myst = myst + "- "; //replaces all of them with - in the hidden text box
+
+ }
+ document.getElementById("wordBox").innerHTML = myst; //sets hidden text box
+
+}
+
+
+function checkLetter() { //check if guess is correct
+ var origin = this.id; //this is the letter that is guessed, called from a button with ID of the letter
+ correct = 0;
+ for (i = 0; i < mystWord.length; i++) { //tests every letter of the mystery word to see if guess is valid
+  if (mystWord.charAt(i) == origin) {
+   myst = myst.substring(0, 2 * i) + origin + myst.substring(2 * i + 1); //if the letter is at a location, replaces the - there with the letter
+   correct = 1;
+   this.style.backgroundColor = "lightgreen"; // if the letter is valid, the button will turn green to show it is correct
+  }
+
+
+ }
+
+ if (!guessed.includes(this.id)) { //if the letter has not been guessed already
+
+  if (correct == 0) { //if the guess was not correct
+   incorrect = incorrect + 1; //adds one to incorrect counter
+   this.style.backgroundColor = "red"; //changes color of button to red to show it was wrong
+   scores.incorrect(round); //tells the score keeper the there was an incorrect guess in the round
+  } else {
+   scores.correct(round); // tells score keeper there was a correct guess
+  }
+  document.getElementById("p2").innerHTML = "Guesses : " + incorrect;
+  guessed += this.id //Adds the letter to the list of letter that has been guessed already
+  document.getElementById("p1").innerHTML = "Letters picked: " + guessed; //updates text box
+  ctx.clearRect(0, 0, c.width, c.height); //updates hangman picture
+  for (i = 0; i <= incorrect; i++) {
+   draw[i](); //draws as many "stages" of the hangman as there are incorrect guesses
+  }
+
+
+ }
+
+ document.getElementById("p3").innerHTML = "Score: " + scores.score(round) + " Level: " + round;
+ document.getElementById("wordBox").innerHTML = myst;
+ checkComplete(); //checks if the word is complete
+}
+function character(type, index, coordinates) {
+	this.altSprite2;
+	this.powerup;
+	this.angle;
+	this.angle2;
+	this.clip = [];
+    this.type = type;
+		this.index = index;
+		this.velocity = [0,0];
+		this.x = coordinates[0];
+		this.test = [0,0];
+		this.mineClip = [];
+    this.y = coordinates[1];
+		this.reload = function(){
+			var bullet = new gameElement(this.bulletType, counter, [0,0], [0,0])
+			assignValues(bullet);
+			counter++;
+			this.clip.push(bullet);
+				if(this.clip.length<this.capacity){
+					setTimeout(this.reload.bind(this), this.timeout());
+				}
+		};
+		this.mine = function(){
+
+			if(this.mineClip.length>0){
+				var bomb = this.mineClip.shift();
+				bomb.x = this.x;
+				bomb.y = this.y;
+				assignValues(bomb);
+				tiles[bomb.index] = bomb;
+				if(this.mineClip[0]){
+					if((this.mineClip[0].type!="Bomb2")&&(this.powerup == "Nuclear")){
+						this.altSprite = false;
+						this.powerup = false;
+					}
+					return bomb;
+				};
+				this.altSprite = false;
+				this.powerup = false;
+				return bomb;
+				}
+		};
+		this.damage = function(){
+			this.lives -= 1;
+			if(!this.lives){
+				this.damageKill()
+			}
+			if(this.type == "Enemy1" && this.lives == 1){
+				if(this.source){
+					this.sprite = new Image();
+					this.sprite.src = (this.source3);
+				}
+			}
+		}
+		this.moveTo = function(x, y){
+			var dist = distance(x, y, this.x, this.y);
+			this.direction = [(x - this.x)/dist,(y - this.y)/dist];
+			this.angle = Math.atan2(this.direction[0],-this.direction[1]);
+			this.updateSpeed();
+		};
+		this.shootHandle = function(direction){
+
+			if(this.clip.length <1){
+				return;
+			};
+			if(this.clip.length == this.capacity){
+				setTimeout(this.reload.bind(this), this.timeout());
+			};
+			this.shoot(this.clip.shift(), direction);
+		}
+		this.shoot = function(bullet, direction) {
+		//	console.log(bullet)
+			bullet.x = this.x;
+			bullet.y = this.y;
+			bullet.direction = direction;
+			bullet.updateSpeed();
+			bullets["b" + bullet.index] = bullet;
+			if(this.clip[0]){
+				if((this.clip[0].type!="Bullet2")&&(this.powrerup == "FastShot")){
+					this.altSprite = false;
+					this.powerup = false;
+
+				}
+				return;
+			}
+			this.altSprite = false;
+			this.powerup = false;
+
+		};
+		this.timeout = function(){
+			return this.cooldown;
+		}
+		this.onload = function(){
+			for(i = 0; i <this.capacity; i++){
+				var bullet = new gameElement(this.bulletType, counter, [0,0], [0,0])
+				assignValues(bullet);
+				counter++;
+				this.clip.push(bullet);
+			};
+			for(i = 0; i <this.bombClip; i++){
+				var mine = new gameTile("Bomb1", tileCounter, [0,0], [0,0])
+				tileCounter++;
+				mine.loadEffect();
+				this.mineClip.push(mine);
+			};
+			players[this.index] = this;
+			if(this.type=="Enemy1"||this.type=="Enemy2"){
+				var ai = new AI(this,this.matrix);
+				this.ai = ai;
+				ai.generateMove();
+				ai.generateAction();
+			}
+			if(this.source){
+				this.sprite = new Image();
+				this.sprite.src = (this.source);
+			}
+			if(this.source2){
+				this.sprite2 = new Image();
+				this.sprite2.src = (this.source2);
+			}
+			if(this.lifeSource){
+				this.lifeSprite = new Image();
+				this.lifeSprite.src = (this.lifeSource);
+				//console.log(this.lifeSprite)
+			}
+		};
+
+		this.updateSpeed = function(){
+			this.velocity[0] = this.speed*this.direction[0];
+			this.velocity[1] = this.speed*this.direction[1];
+		};
+
+		this.direction = [0,0];
+		this.relx = function() {
+			return (this.x - 60* this.i());
+		};
+		this.rely = function() {
+			return (this.y - 60 * this.j());
+		};
+
+		this.i = function(){
+			return (Math.floor(this.x/60));
+		};
+		this.j = function(){
+			return (Math.floor(this.y	/60));
+		};
+
+    this.update = function() {
+        ctx = myGameArea.context;
+				this.newPos();
+			if(this.source2){
+				ctx.translate(this.x, this.y);
+				ctx.rotate(this.angle)
+				ctx.drawImage(this.sprite2, -30,-30);
+				if(this.altSprite2){
+					ctx.drawImage(this.altSprite2,-30,-30);
+				}
+				ctx.rotate(this.angle2-this.angle);
+				ctx.drawImage(this.sprite, -30, -30);
+				if(this.altSprite){
+					ctx.drawImage(this.altSprite,-30,-30);
+				}
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+			}		else {
+				ctx.fillStyle = this.color;
+				ctx.beginPath();
+
+				ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+	      ctx.fill();
+			}
+
+	/*		ctx.beginPath();
+			ctx.strokeStyle = "purple"
+			ctx.moveTo(this.x,this.y);
+			ctx.lineTo(this.x+50*this.direction[0],this.y+50*this.direction[1]);
+			ctx.stroke();
+*/
+			if(this.ai){
+	/*			ctx.beginPath();
+				ctx.strokeStyle = "blue";
+				ctx.moveTo(this.x,this.y);
+				ctx.lineTo(this.x-50*Math.cos(this.ai.lastWall[0]*2*Math.PI),this.y+50*Math.sin(this.ai.lastWall[0]*2*Math.PI));
+				ctx.stroke();
+				ctx.beginPath();
+				ctx.strokeStyle = "orange"
+				ctx.moveTo(this.x,this.y);
+				ctx.lineTo(this.x+50*this.test[0],this.y+50*this.test[1]);
+				ctx.stroke();*/
+
+				for(var i in players){
+					if(players[i]!=this){
+						if(!lineOfSight(this, players[i])||!lineOfSight(players[i],this)){
+							this.ai.seeEnemy(false);
+							return;
+						} else{
+							this.ai.seeEnemy(players[i]);
+							return
+						}
+
+				}
+			}
+
+
+		}
+
+
+    };
+		this.damageKill = function(){
+			if(this.ai){
+				this.ai.kill();
+				delete this.ai;
+				//console.log(this.ai);
+			}
+			if(this.type == "Player"){
+				endGame(false);
+				return;
+			} else if(Object.keys(players).length==2){
+				endGame(true);
+			}
+			delete players[this.index];
+		}
+		this.kill = function(){
+				if(this.ai){
+					this.ai.kill();
+					delete this.ai;
+					//console.log(this.ai);
+				}
+				delete players[this.index];
+
+		};
+    this.newPos = function() {
+			if(this.type == "Player"){
+        if(((this.x-xClick)*(this.x-xClick)<2)&&((this.y-yClick)*(this.y-yClick)<2)){
+			this.velocity[0] = 0;
+			this.velocity[1] = 0;
+}
+    }
+		this.crashWith();
+		this.x += this.velocity[0];
+		this.y += this.velocity[1];
+	}
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]];
+		this.collision = [0,0];
+		this.cardinal = [[0,-1, 3/4],[0,1,1/4],[-1,0,0],[1,0,1/2]];
+    this.crashWith = function() {
+			for(let a of this.cardinal){
+				var i = a[0];
+				var j =a[1];
+				this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+				if((wallcheck(this.j()-j,this.i()-i) !=0)&&((this.meme[i+1][j+1]-30)*-(i+j)>30-this.radius)){
+					if(true){
+							this.velocity[1] = i*i*this.velocity[1];
+							this.velocity[0] = j*j*this.velocity[0];
+						} else {
+							this.velocity = [0,0];
+						}
+					if(this.ai){
+						this.ai.lastWall = [a[2],3];
+
+					}
+
+
+
+				}
+			}
+
+		/*	if(((wallcheck(this.j()-1,this.i()) != 0 )&&(this.rely()+this.velocity[1]<= 25))||((wallcheck(this.j()+1,this.i()) != 0 )&&(this.rely() +this.velocity[1] >= 35)) ) {
+						this.velocity[1] = 0;
+						return;
+					} else if(((wallcheck(this.j(),this.i()-1) != 0 )&&(this.relx() + this.velocity[0] <= 25)) ||((wallcheck(this.j(),this.i()+1) != 0 )&& (this.relx() + this.velocity[0] >= 35)) ) {
+						this.velocity[0] = 0;
+						return;
+    }*/
+					for (i=-1;i<=1;i=i+2){
+						for(j = -1; j<=1; j = j+2){
+							if((wallcheck(this.j()+j,this.i()+i)!=0)&&(distance(this.relx()+this.velocity[0],this.rely()+this.velocity[1],(1+i)*30,(1+j)*30)<=this.radius)){
+								if(this.velocity[0]*this.velocity[0]>this.velocity[1]*this.velocity[1]){
+									this.velocity[0] = -0.2*this.velocity[0];
+								}	else{
+
+									this.velocity[1] = -0.2*this.velocity[1];
+								}
+									/*	this.x += -0.5*this.velocity[0];
+										this.y += -0.5*this.velocity[1];
+										this.velocity = [0,0];*/
+
+									if(this.ai){
+										if([i,j] = [-1,-1]){
+											this.ai.lastWall = [7/8,3];
+										} else if([i,j] = [-1,1]){
+											this.ai.lastWall = [1/8,3];
+										}	else if([i,j] = [1,1]){
+											this.ai.lastWall = [3/8,3];
+										}	else if([i,j] = [1,-1]){
+											this.ai.lastWall = [5/8,3];
+										};
+
+									}
+									return [i,j];
+
+				}
+			}
+		}
+		}
+}
+
+
+function gameElement(type, index, coordinates, direction) {
+    this.type = type;
+		this.index = index;
+		this.x = coordinates[0];
+    this.y = coordinates[1];
+		this.velocity = [0,0];
+		this.angle;
+
+		this.updateSpeed = function(){
+			this.velocity[0] = this.speed*this.direction[0];
+			this.velocity[1] = this.speed*this.direction[1];
+			this.angle = Math.atan2(this.velocity[0],-this.velocity[1]);
+		};
+		this.relx = function() {
+			return (this.x - 60* this.i());
+		};
+		this.rely = function() {
+			return (this.y - 60 * this.j());
+		};
+
+		this.i = function(){
+			return (Math.floor(this.x/60));
+		};
+		this.j = function(){
+			return (Math.floor(this.y	/60));
+		};
+		this.onload = function(){
+			if(this.source){
+				this.sprite = new Image();
+				this.sprite.src = (this.source);
+				this.sprite2 = new Image();
+				this.sprite2.src = (this.source2);
+			}
+			this.updateSpeed();
+		}
+    this.update = function() {
+        ctx = myGameArea.context;
+				this.newPos();
+				if(this.source){
+					ctx.translate(this.x, this.y);
+					ctx.rotate(this.angle)
+					ctx.drawImage(this.sprite, -3.5,-5);
+					ctx.setTransform(1, 0, 0, 1, 0, 0);
+				} else {
+					ctx.fillStyle = this.color;
+					ctx.beginPath();
+					ctx.arc(this.x,this.y,this.radius,0,2*Math.PI);
+		      ctx.fill();
+				}
+
+    };
+
+		this.direction  = direction;
+    this.newPos = function() {
+			if(this.type == "Player"){
+        if(((this.x-xClick)*(this.x-xClick)<2)&&((this.y-yClick)*(this.y-yClick)<2)){
+			this.velocity[0] = 0;
+			this.velocity[1] = 0;
+}
+    }
+		this.crashWith();
+		this.x += this.velocity[0];
+		this.y += this.velocity[1];
+	}
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]];
+		this.ricochet = function(dir) {
+			var k = dir[0];
+			var l = dir[1];
+			if((k==0)||(l==0)){
+				this.velocity[0] = ((l-1)*(l+1)+l*l)*this.velocity[0];
+				this.velocity[1] = ((k-1)*(k+1)+k*k)*this.velocity[1];
+			} else {
+				this.velocity[0] = -this.velocity[0];
+				this.velocity[1] = -this.velocity[1];
+			}
+			this.angle = Math.atan2(this.velocity[0],-this.velocity[1]);
+			this.bounces = this.bounces -1
+		}
+		this.collision = [0,0];
+		this.kill = function(){
+				delete bullets["b"+this.index];
+		};
+		this.cardinal = [[0,-1],[0,1],[-1,0],[1,0]];
+		this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+		this.inside = 1;
+    this.crashWith = function() {
+			this.meme = [[0,this.relx()+this.velocity[0],0],[this.rely()+this.velocity[1],0,this.rely()+this.velocity[1]],[0,this.relx()+this.velocity[0],0]]
+			var inside = 0;
+			for(var i in players) {
+				if(collideWith(this,players[i])){
+					if(!this.inside){
+						this.kill();
+						players[i].damage();
+
+					}
+					inside = 1;
+				}
+				if(!this.inside && players[i].detectRange){
+					if(inRange(this,players[i])){
+						players[i].ai.dodge(this);
+					}
+				}
+			}
+			this.inside = inside;
+			for(var i in bullets) {
+				if(bullets[i]!=this){
+				if(collideWith(this,bullets[i])){
+						this.kill();
+						bullets[i].kill();
+				}
+				}
+			}
+			for(var i in tiles){
+				if(collideWith(this,tiles[i])){
+					this.kill()
+					tiles[i].timeLeft = 00;
+					tiles[i].blipEffect();
+				}
+			}
+
+
+
+
+			for(let a of this.cardinal){
+				var i = a[0];
+				var j =a[1];
+				if((wallcheck2(this.j()-j,this.i()-i) !=0)&&((this.meme[i+1][j+1]-30)*-(i+j)>30-this.radius)){
+					if(this.bounces >0){
+							this.ricochet(a);
+					} else{
+								this.kill();
+						}
+					return(a);
+				}
+			}
+
+		/*	if(((wallcheck(this.j()-1,this.i()) != 0 )&&(this.rely()+this.velocity[1]<= 25))||((wallcheck(this.j()+1,this.i()) != 0 )&&(this.rely() +this.velocity[1] >= 35)) ) {
+						this.velocity[1] = 0;
+						return;
+					} else if(((wallcheck(this.j(),this.i()-1) != 0 )&&(this.relx() + this.velocity[0] <= 25)) ||((wallcheck(this.j(),this.i()+1) != 0 )&& (this.relx() + this.velocity[0] >= 35)) ) {
+						this.velocity[0] = 0;
+						return;
+    }*/
+					for (i=-1;i<=1;i=i+2){
+						for(j = -1; j<=1; j = j+2){
+							if((wallcheck2(this.j()+j,this.i()+i)!=0)&&(distance(this.relx()+this.velocity[0],this.rely()+this.velocity[1],(1+i)*30,(1+j)*30)<=this.radius)){
+								if(this.bounces>0){
+									this.ricochet([i,j]);
+								}	else{
+											this.kill();
+									}
+									return [i,j];
+							}
+				}
+			}
+		}
+		}
+function updateInterface(){
+	var offset = 0;
+	for(let a of myGamePiece.clip){
+		ctx = myGameArea.context;
+		if(a.source){
+			ctx.globalAlpha = 0.4;
+			ctx.translate(1100-offset, 80);
+			ctx.rotate(-Math.PI/2);
+			ctx.drawImage(a.sprite2, 0, 0, 28, 40);
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
+			offset += 45
+			ctx.globalAlpha = 1;
+		}
+
+	}
+	offset = 0;
+
+	for(i = 0; i < myGamePiece.lives; i++){
+		if(myGamePiece.lifeSprite){
+			ctx.globalAlpha = 0.8;
+			ctx.translate(1100-offset, 20);
+			//ctx.rotate(Math.PI);
+			ctx.drawImage(myGamePiece.lifeSprite, 0 ,0);
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
+			offset += 70
+			ctx.globalAlpha = 1;
+
+		}
+
+	}
+
+
+	offset = 0;
+	for(let a of myGamePiece.mineClip){
+		if(a.sources){
+			ctx.globalAlpha = 0.4;
+			ctx.translate(1100-offset, 130);
+			ctx.rotate(-Math.PI/2);
+			ctx.drawImage(a.sprites[1], 0, 0, 30, 30);
+			ctx.setTransform(1, 0, 0, 1, 0, 0);
+			offset += 40
+			ctx.globalAlpha = 1;
+		}
+
+	}
+}
+function gameTile(type, index, coordinates){
+	this.bliptimeLeft;
+	this.spriteMode = 0;
+	this.sprites = [];
+	this.sprite = 0;
+	this.velocity = [0,0];
+	this.type = type;
+	this.index = index;
+	this.percent = 1;
+	this.growth = 0;
+	this.x = coordinates[0];
+	this.boom = false;
+	this.growth = 0.2;
+	this.growth2;
+	this.y = coordinates[1];
+	this.update = function() {
+			ctx = myGameArea.context;
+			if(!this.effectCheck()){
+				if(this.boom){
+					this.percent += this.growth * (this.growth2 - this.percent) ;
+
+				}
+				for(var i in players) {
+					if(players[i].detectRange){
+						if(killRange(players[i],this)){
+							players[i].ai.dodge2(this);
+						}
+					}
+				}
+				ctx.translate(this.x, this.y);
+
+				ctx.drawImage(this.sprite, 0, 0, this.spriteWidth, this.spriteHeight, -this.percent*this.spriteWidth/2, -this.percent*this.spriteHeight/2, this.percent*this.spriteWidth, this.percent*this.spriteHeight);
+				ctx.beginPath();
+				ctx.arc(0,0, this.explosionRadius,0,2*Math.PI);
+				ctx.stroke();
+				ctx.setTransform(1, 0, 0, 1, 0, 0);
+			};
+	};
+	this.onload = function(){
+		this.timeHandle(1000);
+
+		return;
+	};
+	this.effectCheck = function(){
+		return;
+	};
+	this.kill = function(){
+		clearTimeout(this.bliptimeLeft);
+			delete tiles[this.index];
+			delete this;
+	}
+	this.checkEffect = function(){
+		return;
+	};
+
+	this.loadEffect = function(){
+		for(var abc in classes[this.type]){
+			this[abc] = classes[this.type][abc];
+		}
+		for(let a of this.sources){
+			var tempe = new Image();
+			tempe.src = (a);
+			this.sprites.push(tempe);
+		};
+		this.sprite = this.sprites[this.spriteMode];
+		//console.log(this.sprite)
+		this.growth2 = this.explosionRadius*2 /this.spriteWidth
+	};
+	this.timeHandle = function(delay){
+		this.bliptimeLeft =  setTimeout(this.blipEffect.bind(this), delay);
+		this.timeLeft -= delay;
+	};
+	this.blipEffect = function(){
+		clearTimeout(this.bliptimeLeft);
+		if(this.timeLeft>0){
+			this.spriteMode += 1;
+			this.spriteMode %= 2;
+			this.sprite = this.sprites[this.spriteMode];
+			this.timeHandle(1000);
+		}else{
+			this.explode();
+		}
+	};
+	this.explode = function(){
+		for(let i of blockLine){
+			if(i.type ==2){
+				if(distance(this.x,this.y,i.posx+30,i.posy+30)<this.explosionRadius){
+				display1[i.posy/60][i.posx/60] = 0;
+			}
+				};
+			};
+			for(var i in players) {
+
+				if(killRange(players[i],this)){
+
+						players[i].damageKill();
+				};
+			}
+			for(var i in bullets) {
+				if(killRange(bullets[i],this)){
+						bullets[i].kill();
+				}
+		}
+		for(var i in tiles){
+			if(killRange(tiles[i],this)&&tiles[i].timeLeft<0){
+				tiles[i].explode();
+			}
+		}
+		blockLine = [];
+		squares();
+		this.sprite = this.sprites[2];
+		this.boom = true;
+
+		//this.percent = 5.3
+		setTimeout(this.kill.bind(this), 300);
+		return;
+	}
+}
+//mark
+function powerup(type, index, coordinates){
+	this.bliptimeLeft;
+	this.sprites = [];
+	this.sprite = 0;
+	this.velocity = [0,0];
+	this.type = type;
+	this.visible = 1;
+	this.index = index;
+	this.x = coordinates[0];
+	this.y = coordinates[1];
+	this.target;
+	this.spriteMode = 0;
+	this.update = function() {
+			ctx = myGameArea.context;
+			if(this.visible){
+				if(!this.effectCheck()){
+					ctx.translate(this.x, this.y);
+					ctx.drawImage(this.sprite, -this.spriteWidth/2,-this.spriteHeight/2);
+					ctx.setTransform(1, 0, 0, 1, 0, 0);
+				};
+			};
+
+	};
+	this.onload = function(){
+		for(let a of this.sources){
+			var tempe = new Image();
+			tempe.src = (a);
+			this.sprites.push(tempe);
+		};
+		this.sprite = this.sprites[this.spriteMode];
+		return;
+	};
+	this.effectCheck = function(){
+		for(var i in players) {
+			if(collideWith(players[i],this)){
+				this.target = players[i];
+				this.boost();
+				this.visible = 0;
+					return true;
+			};
+		};
+		return;
+	};
+	this.kill = function(){
+			delete powerups[this.index];
+			delete(this);
+
+	}
+}
+
+function distance(x1, y1, x2, y2){
+	var re =  Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2)	);
+	return re;
+}
+
+function collideWith(t1,t2){
+	if(distance(t1.x,t1.y,t2.x,t2.y) <= (t1.radius + t2.radius)){
+		return true;
+	}
+	return false;
+
+
+}
+function inRange(t1, t2) {
+	if(distance(t1.x + t1.velocity[0],t1.y+t1.velocity[1],t2.x+t2.velocity[0],t2.y+t2.velocity[1]) <= (t1.radius + t2.detectRange)){
+		return true;
+	}
+	return false;
+
+}
+function killRange(t1, t2) {
+
+		if(distance(t1.x +t1.velocity[0],t1.y+t1.velocity[1],t2.x+t2.velocity[0],t2.y+t2.velocity[1]) <= (t1.radius + t2.explosionRadius)){
+			return true;
+		}
+
+
+	return false;
+
+}
+function wallcheck(y,x){
+	if((x<0)||(x>=display1[0].length)||(y<0)||(y>=display1.length)){
+		return 1;
+	}
+	/*else if(display1[y][x]>5){
+		return false;
+
+	}*/ else{
+			return display1[y][x];
+	}
+}
+function wallcheck2(y,x){
+	if((x<0)||(x>=display1[0].length)||(y<0)||(y>=display1.length)){
+		return 1;
+	}
+	else if(display1[y][x] == 3) {
+		return 0;
+	}/* else if(display1[y][x]>5){
+		return false;
+
+	} */else{
+			return display1[y][x];
+	}
+}
+function updateGameArea() {
+
+    myGameArea.clear();
+    myField.update();
+		for(var i in tiles){
+			tiles[i].update();
+		}
+		for(var i in powerups){
+			powerups[i].update();
+		}
+		for(var i in players) {
+			players[i].update();
+		}
+	for(var i in bullets) {
+		bullets[i].update();
+	}
+		updateInterface();
+
+}
+function objectDistance(t1, t2){
+	return distance(t1.x, t1.y, t2.x, t2.y);
+}
+function direc(x1,y1,x2,y2){
+	var dist = distance(x1,y1,x2,y2);
+	return [(x2 - x1)/dist,(y2 - y1)/dist];
+}
+function lineOfSight(t1, t2){
+	var x1 = t1.x;
+	var x2 = t2.x;
+	var y1 = t1.y;
+	var y2 = t2.y;
+	var m =  (y1-y2)/(x1-x2);
+	var b = y1- m*x1;
+	for(i = 60*Math.ceil(x1/60) ; i<x2; i+= 60){
+		var l = Math.floor((m*i+b)/60);
+		var k = Math.floor(i/60);
+		if(wallcheck(l, k)){
+			return false;
+		};
+	};
+	for(i = 60*Math.ceil(y1/60) ; i<y2; i+= 60){
+		var l = i/60;
+		var k = Math.floor((i-b)/(m*60));
+		if(wallcheck(l, k)){
+			return false;
+		};
+	}
+	return true;
+
+}
+
+function endGame(cond){
+	if(cond){
+		pause();
+		myGameArea.canvas.style.opacity = 0;
+		dropInput();
+
+
+		var livesLeft = myGamePiece.lives;
+		round++;
+		blockLine =[]
+		for (var prop in bullets) { if (bullets.hasOwnProperty(prop)) { bullets[prop].kill(); } }
+		for (var prop in tiles) { if (tiles.hasOwnProperty(prop)) { tiles[prop].kill(); } }
+		for (var prop in powerups) { if (powerups.hasOwnProperty(prop)) { powerups[prop].kill(); } }
+		for (var prop in players) { if (players.hasOwnProperty(prop)) {  players[prop].kill(); } }
+
+
+
+		return;
+	} else {
+		round = 0;
+		resetFields();
+		blockLine =[]
+
+		for (var prop in bullets) { if (bullets.hasOwnProperty(prop)) { bullets[prop].kill(); } }
+		for (var prop in tiles) { if (tiles.hasOwnProperty(prop)) { tiles[prop].kill(); } }
+		for (var prop in powerups) { if (powerups.hasOwnProperty(prop)) { powerups[prop].kill(); } }
+		for (var prop in players) { if (players.hasOwnProperty(prop)) {  players[prop].kill(); } }
+		
+		document.location.reload(true);
+		//startGame();
+		return;
+	
+	}
+}
+
+
+
+
+
+function assignValues(object){
+	for(var abc in classes[object.type]){
+		object[abc] = classes[object.type][abc];
+	}
+	object.onload();
+	//console.log(object)
+};
+
+resetFields();
+
+</script></html>
